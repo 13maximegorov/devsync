@@ -1,31 +1,29 @@
+import { ModeToggle } from '@/components/ModeToggle';
 import { SignInForm } from '@/components/form/SignInForm';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Logo } from '@/components/ui/icons';
 import Link from 'next/link';
 
 const Page = () => {
   return (
-    <div className="container relative flex h-full items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <Link
-        href="/sign-up"
-        className={cn(
-          buttonVariants({ variant: 'ghost' }),
-          'absolute right-8 top-8',
-        )}
-      >
-        Регистрация
-      </Link>
-      <div className="hidden h-full bg-muted lg:flex"></div>
-      <div className="lg:p-8">
-        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-          <div className="flex flex-col space-y-2 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight">
-              Войдите в учетную запись
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Введите данные ниже, чтобы войти в свою учетную запись
-            </p>
-          </div>
+    <div className="container h-full">
+      <div className="flex w-full items-center justify-between pt-4">
+        <Logo className="w-36 text-black dark:text-white" />
+        <div className="flex items-center gap-2">
+          <Button
+            asChild
+            variant="ghost"
+          >
+            <Link href="/sign-up">Регистрация</Link>
+          </Button>
+          <ModeToggle />
+        </div>
+      </div>
+      <div className="flex h-[calc(100%-56px)] items-center">
+        <div className="mx-auto flex w-full flex-col justify-center space-y-6 md:w-[450px]">
+          <h1 className="text-center text-2xl font-semibold tracking-tight">
+            Войдите в DevSync
+          </h1>
           <SignInForm />
         </div>
       </div>

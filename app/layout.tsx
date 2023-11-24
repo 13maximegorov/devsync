@@ -29,7 +29,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
       <body className={cn('font-sans', fontSans.variable)}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="dark"
           enableSystem
           storageKey="devsync-theme"
           disableTransitionOnChange
