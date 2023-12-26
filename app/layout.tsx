@@ -1,6 +1,8 @@
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
+import { ruRU } from '@clerk/localizations';
+import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
@@ -22,22 +24,30 @@ interface RootLayoutProps {
 
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-    >
-      <body className={cn('font-sans', fontSans.variable)}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          storageKey="devsync-theme"
-          disableTransitionOnChange
+    <ClerkProvider localization={ruRU}>
+      <html
+        lang="en"
+        suppressHydrationWarning
+      >
+        <body
+          className={cn(
+            'font-sans',
+            fontSans.variable,
+            'bg-white dark:bg-[#313338]',
+          )}
         >
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            storageKey="devsync-theme"
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 };
 
