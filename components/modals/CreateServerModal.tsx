@@ -19,10 +19,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useModalStore } from '@/hooks/useModalStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -37,14 +37,11 @@ const formSchema = z.object({
 
 type FormSchema = z.infer<typeof formSchema>;
 
-export const InitialModal = () => {
-  const [isMounted, setIsMounted] = useState(false);
-
+export const CreateServerModal = () => {
+  const { isOpen, onClose, type } = useModalStore();
   const router = useRouter();
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isModalOpen = isOpen && type === 'createServer';
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -62,22 +59,26 @@ export const InitialModal = () => {
 
       form.reset();
       router.refresh();
-      window.location.reload();
+      onClose();
     } catch (error) {
       console.log(error);
     }
   };
 
-  if (!isMounted) {
-    return null;
-  }
+  const handleClose = () => {
+    form.reset();
+    onClose();
+  };
 
   return (
-    <Dialog open>
+    <Dialog
+      open={isModalOpen}
+      onOpenChange={handleClose}
+    >
       <DialogContent className="overflow-hidden bg-white p-0 text-black">
         <DialogHeader className="px-6 pt-8">
           <DialogTitle className="text-center text-2xl font-bold">
-            Создайте сервер
+            Создать сервер
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
             Дайте название и изображение серверу. Вы всегда можете изменить его

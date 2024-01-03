@@ -4,9 +4,9 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { currentProfile } from '@/lib/current-profile';
 import db from '@/lib/db';
+import { UserButton } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 import { NavigationItem } from './NavigationItem';
-import { UserButton } from '@clerk/nextjs';
 
 export const NavigationSidebar = async () => {
   const profile = await currentProfile();
@@ -23,10 +23,13 @@ export const NavigationSidebar = async () => {
         },
       },
     },
+    orderBy: {
+      createdAt: 'asc',
+    },
   });
 
   return (
-    <div className="flex h-full w-full flex-col items-center space-y-4 py-3 text-primary dark:bg-[#1E1F22]">
+    <div className="flex h-full w-full flex-col items-center space-y-4 bg-[#E3E5E8] py-3 text-primary dark:bg-[#1E1F22]">
       <NavigationAction />
       <Separator className="mx-auto h-[2px] w-10 rounded-md bg-zinc-300 dark:bg-zinc-700" />
       <ScrollArea className="w-full flex-1">

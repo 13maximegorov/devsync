@@ -1,3 +1,4 @@
+import { ModalProvider } from '@/components/providers/ModalProvider';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
@@ -43,6 +44,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
             storageKey="devsync-theme"
             disableTransitionOnChange
           >
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </body>

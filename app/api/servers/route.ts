@@ -22,7 +22,7 @@ export async function POST(req: Request) {
         channels: {
           create: [
             {
-              name: 'Общий',
+              name: 'Оcновной',
               profileId: profile.id,
             },
           ],

@@ -17,7 +17,7 @@ export const ModeToggle = (props: ButtonProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
+          variant="ghost"
           size="icon"
           {...props}
         >
