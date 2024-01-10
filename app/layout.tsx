@@ -1,4 +1,5 @@
 import { ModalProvider } from '@/components/providers/ModalProvider';
+import { SocketProvider } from '@/components/providers/SocketProvider';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
@@ -44,8 +45,10 @@ const RootLayout = ({ children }: RootLayoutProps) => {
             storageKey="devsync-theme"
             disableTransitionOnChange
           >
-            <ModalProvider />
-            {children}
+            <SocketProvider>
+              <ModalProvider />
+              {children}
+            </SocketProvider>
           </ThemeProvider>
         </body>
       </html>
