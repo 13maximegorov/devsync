@@ -11,16 +11,14 @@ import {
 } from '@/components/ui/dialog';
 import { useModalStore } from '@/hooks/useModalStore';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
 import qs from 'query-string';
 import { useState } from 'react';
 
-export const DeleteChannelModal = () => {
+export const DeleteMessageModal = () => {
   const { isOpen, onClose, type, data } = useModalStore();
-  const router = useRouter();
 
-  const isModalOpen = isOpen && type === 'deleteChannel';
-  const { server, channel } = data;
+  const isModalOpen = isOpen && type === 'deleteMessage';
+  const { apiUrl, query } = data;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,17 +27,13 @@ export const DeleteChannelModal = () => {
       setIsLoading(true);
 
       const url = qs.stringifyUrl({
-        url: `/api/channels/${channel?.id}`,
-        query: {
-          serverId: server?.id,
-        },
+        url: apiUrl || '',
+        query,
       });
 
       await axios.delete(url);
 
       onClose();
-      router.push(`/servers/${server?.id}`);
-      router.refresh();
     } catch (error) {
       console.log(error);
     } finally {
@@ -55,14 +49,12 @@ export const DeleteChannelModal = () => {
       <DialogContent className="overflow-hidden bg-white p-0 text-black">
         <DialogHeader className="px-6 pt-8">
           <DialogTitle className="text-center text-2xl font-bold">
-            Удалить канал
+            Удалить сообщение
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-            Вы уверены, что хотите безвозвратно удалить канал{' '}
-            <span className="font-semibold text-indigo-500">
-              #{channel?.name}
-            </span>
-            ?
+            Вы уверены, что хотите это сделать?
+            <br />
+            Сообщение будет удалено безвозвратно.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="bg-gray-100 px-6 py-4">

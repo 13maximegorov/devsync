@@ -76,7 +76,7 @@ export const MessageFileModal = () => {
 
   return (
     <Dialog
-      open={isOpen}
+      open={isModalOpen}
       onOpenChange={handleClose}
     >
       <DialogContent className="overflow-hidden bg-white p-0 text-black">

@@ -1,4 +1,5 @@
 import { ModalProvider } from '@/components/providers/ModalProvider';
+import { QueryProvider } from '@/components/providers/QueryProvider';
 import { SocketProvider } from '@/components/providers/SocketProvider';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { cn } from '@/lib/utils';
@@ -47,7 +48,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
           >
             <SocketProvider>
               <ModalProvider />
-              {children}
+              <QueryProvider>{children}</QueryProvider>
             </SocketProvider>
           </ThemeProvider>
         </body>
