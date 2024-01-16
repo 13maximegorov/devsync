@@ -3,8 +3,10 @@
 import { ChatItem } from '@/components/chat/ChatItem';
 import { ChatWelcome } from '@/components/chat/ChatWelcome';
 import { useChatQuery } from '@/hooks/useChatQuery';
+import { useChatSocket } from '@/hooks/useChatSocket';
 import format from '@/lib/format';
-import { Member, Message, Profile } from '@prisma/client';
+import { MessageWithMemberWithProfile } from '@/types';
+import { Member } from '@prisma/client';
 import { Loader2, ServerCrash } from 'lucide-react';
 import { Fragment } from 'react';
 
@@ -19,12 +21,6 @@ interface ChatMessagesProps {
   paramValue: string;
   type: 'channel' | 'conversation';
 }
-
-type MessageWithMemberWithProfile = Message & {
-  member: Member & {
-    profile: Profile;
-  };
-};
 
 interface Data {
   items: MessageWithMemberWithProfile[];
@@ -45,6 +41,8 @@ export const ChatMessages = ({
   type,
 }: ChatMessagesProps) => {
   const queryKey = `chat:${chatId}`;
+  const addKey = `chat:${chatId}:messages`;
+  const updateKey = `chat:${chatId}:messages:update`;
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useChatQuery<Data>({
@@ -53,6 +51,7 @@ export const ChatMessages = ({
       paramKey,
       paramValue,
     });
+  useChatSocket({ queryKey, addKey, updateKey });
 
   if (status === 'pending') {
     return (

@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { io as SocketIOClient, type Socket } from 'socket.io-client';
+import { io, type Socket } from 'socket.io-client';
 
 type SocketContextType = {
   socket: Socket | null;
@@ -32,23 +32,29 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const socketInstance = SocketIOClient(process.env.NEXT_PUBLIC_SITE_URL!, {
-      path: '/api/socket/io',
-      addTrailingSlash: false,
-    });
+    let socketInstance: Socket;
 
-    socketInstance.on('connect', () => {
-      setIsConnected(true);
-    });
+    const socketFetch = async () => {
+      await fetch('/api/socket/io');
+      socketInstance = io();
 
-    socketInstance.on('disconnect', () => {
-      setIsConnected(false);
-    });
+      socketInstance.on('connect', () => {
+        setIsConnected(true);
+      });
 
-    setSocket(socketInstance);
+      socketInstance.on('disconnect', () => {
+        setIsConnected(false);
+      });
+
+      setSocket(socketInstance);
+    };
+
+    socketFetch();
 
     return () => {
-      socketInstance.disconnect();
+      if (socketInstance) {
+        socketInstance.disconnect();
+      }
     };
   }, []);
 
