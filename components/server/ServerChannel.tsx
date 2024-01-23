@@ -32,7 +32,7 @@ export const ServerChannel = ({
   const Icon = iconMap[channel.type];
 
   const onClick = () => {
-    router.push(`/servers/${params.serverId}/channels/${channel.id}`);
+    router.push(`/servers/${params?.serverId}/channels/${channel.id}`);
   };
 
   const onAction = (e: MouseEvent, action: ModalType) => {
@@ -45,14 +45,14 @@ export const ServerChannel = ({
       onClick={onClick}
       className={cn(
         'group mb-1 flex w-[232px] items-center gap-x-2 rounded-md px-2 py-2 transition hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50',
-        params.channelId === channel.id && 'bg-zinc-700/20 dark:bg-zinc-700',
+        params?.channelId === channel.id && 'bg-zinc-700/20 dark:bg-zinc-700',
       )}
     >
       <Icon className="h-5 w-5 shrink-0 text-zinc-500 dark:text-zinc-400" />
       <p
         className={cn(
           'truncate text-sm font-semibold text-zinc-500 transition group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300',
-          params.channelId === channel.id &&
+          params?.channelId === channel.id &&
             'text-primary dark:text-zinc-200 dark:group-hover:text-white',
         )}
       >
