@@ -17,22 +17,6 @@ services:
     volumes:
       - $PWD/livekit.yaml:/livekit.yaml
     command: --config /livekit.yaml --node-ip=127.0.0.1
-  nextjs:
-    build:
-      context: .
-      target: dev
-    restart: always
-    command: npm run dev:prisma
-    ports:
-      - 3000:3000
-    environment:
-      - NODE_ENV=development
-    volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
-    depends_on:
-      - postgres
 
 volumes:
   postgres_data:
