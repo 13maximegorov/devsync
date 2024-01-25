@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DevSync
 
-## Getting Started
+**DevSync** is an instant messaging, audio and video conferencing application for software development teams.
 
-First, run the development server:
+Technology stack:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. TypeScript
+2. React
+3. Next.js
+4. shadcn/ui
+5. Tailwind CSS
+6. Zustand
+7. Prisma
+8. Zod
+9. PostgreSQL
+10. Socket.IO
+11. TanStack Query
+12. LiveKit (Golang)
+13. ESLint
+14. Prettier
+15. Docker
+16. Caddy
+
+## How to start DevSync
+
+### Development
+
+```zsh
+docker-compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Server URL:  ws://localhost:7880
+API Key: APIRmV5JPxDKCoC
+API Secret: KoftdQCncHktCUspx78BSeMhxwXotnzANWefz6EteMhG
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Here's a test token generated with your keys: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDIwOTQzMjEsImlzcyI6IkFQSVJtVjVKUHhES0NvQyIsIm5hbWUiOiJUZXN0IFVzZXIiLCJuYmYiOjE3MDYwOTQzMjEsInN1YiI6InRlc3QtdXNlciIsInZpZGVvIjp7InJvb20iOiJteS1maXJzdC1yb29tIiwicm9vbUpvaW4iOnRydWV9fQ.HvTQ8hoohCPBTlUY8aH86LJhUn2uJ9-
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Server URL: wss://livekit.devsync.ru
+API Key: APIkZCtoqxmZ8nj
+API Secret: TtE974f1YU8XT1XmlA4EYM7SDwec6QehsVwhfI9cMKLD
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Here's a test token generated with your keys: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDIxMDQwMzYsImlzcyI6IkFQSWtaQ3RvcXhtWjhuaiIsIm5hbWUiOiJUZXN0IFVzZXIiLCJuYmYiOjE3MDYxMDQwMzYsInN1YiI6InRlc3QtdXNlciIsInZpZGVvIjp7InJvb20iOiJteS1maXJzdC1yb29tIiwicm9vbUpvaW4iOnRydWV9fQ.cCabJk9jkvCvmkaTOSfw72R-hAfxp1cgMfwiLPETw2o

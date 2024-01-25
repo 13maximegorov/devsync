@@ -7,25 +7,28 @@ services:
     env_file: .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
-  livekit:
-    image: livekit/livekit-server
-    restart: always
-    ports:
-      - 7880:7880
-      - 7881:7881
-      - 7882:7882/udp
-    volumes:
-      - $PWD/livekit.yaml:/livekit.yaml
-    command: --config /livekit.yaml --node-ip=127.0.0.1
   nextjs:
     build: .
     restart: always
     ports:
-      - 80:3000
+      - 3000:3000
     environment:
       - NODE_ENV=production
     depends_on:
       - postgres
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
 
 volumes:
   postgres_data:
+  caddy_data:
+  caddy_config:

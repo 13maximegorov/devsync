@@ -5,7 +5,7 @@ rtc:
     use_external_ip: false
     enable_loopback_candidate: false
 keys:
-    APIaRbfD98QD4hJ: enQGSaHnZkVkHPuv7a7swFY16NRfCXJNO8Lu8ZEM2cM
+    APIRmV5JPxDKCoC: KoftdQCncHktCUspx78BSeMhxwXotnzANWefz6EteMhG
 logging:
     json: false
     level: info
