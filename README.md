@@ -1,8 +1,8 @@
 # DevSync
 
-**DevSync** is an instant messaging, audio and video conferencing application for software development teams.
+**DevSync** — это приложение мгновенного обмена сообщениями, организации аудио- и видеоконференций для команд разработки программного обеспечения..
 
-Technology stack:
+Технологический стек:
 
 1. TypeScript
 2. React
@@ -21,10 +21,20 @@ Technology stack:
 15. Docker
 16. Caddy
 
-## How to start DevSync
+## Как запустить DevSync
 
 ### Development
 
+#### Первый вариант
+
 ```zsh
+npm ci
+npm run dev
 docker-compose up -d
+```
+
+#### Второй вариант
+
+```zsh
+docker-compose -f "docker-compose.dev.yaml" up -d
 ```
