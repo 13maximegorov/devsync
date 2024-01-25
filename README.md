@@ -28,15 +28,3 @@ Technology stack:
 ```zsh
 docker-compose up -d
 ```
-
-Server URL:  ws://localhost:7880
-API Key: APIRmV5JPxDKCoC
-API Secret: KoftdQCncHktCUspx78BSeMhxwXotnzANWefz6EteMhG
-
-Here's a test token generated with your keys: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDIwOTQzMjEsImlzcyI6IkFQSVJtVjVKUHhES0NvQyIsIm5hbWUiOiJUZXN0IFVzZXIiLCJuYmYiOjE3MDYwOTQzMjEsInN1YiI6InRlc3QtdXNlciIsInZpZGVvIjp7InJvb20iOiJteS1maXJzdC1yb29tIiwicm9vbUpvaW4iOnRydWV9fQ.HvTQ8hoohCPBTlUY8aH86LJhUn2uJ9-
-
-Server URL: wss://livekit.devsync.ru
-API Key: APIkZCtoqxmZ8nj
-API Secret: TtE974f1YU8XT1XmlA4EYM7SDwec6QehsVwhfI9cMKLD
-
-Here's a test token generated with your keys: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDIxMDQwMzYsImlzcyI6IkFQSWtaQ3RvcXhtWjhuaiIsIm5hbWUiOiJUZXN0IFVzZXIiLCJuYmYiOjE3MDYxMDQwMzYsInN1YiI6InRlc3QtdXNlciIsInZpZGVvIjp7InJvb20iOiJteS1maXJzdC1yb29tIiwicm9vbUpvaW4iOnRydWV9fQ.cCabJk9jkvCvmkaTOSfw72R-hAfxp1cgMfwiLPETw2o
