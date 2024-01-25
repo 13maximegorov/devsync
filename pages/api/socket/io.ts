@@ -1,4 +1,4 @@
-import type { NextApiResponseServerIO } from '@/types';
+import type { NextApiResponseServerIO } from '@/types/types';
 import type { NextApiRequest } from 'next';
 import { Server } from 'socket.io';
 

@@ -1,6 +1,6 @@
 import { currentProfilePages } from '@/lib/current-profile-pages';
 import db from '@/lib/db';
-import { NextApiResponseServerIO } from '@/types';
+import { NextApiResponseServerIO } from '@/types/types';
 import { NextApiRequest } from 'next';
 
 interface NextApiRequestExtends extends NextApiRequest {

@@ -3,8 +3,8 @@ logging:
     default:
       level: INFO
 storage:
-  "module": "file_system"
-  "root": "/data"
+  'module': 'file_system'
+  'root': '/data'
 apps:
   tls:
     certificates:
@@ -14,25 +14,25 @@ apps:
   layer4:
     servers:
       main:
-        listen: [":443"]
+        listen: [':443']
         routes:
-          - match:
-            - tls:
-                sni:
-                  - "livekit-turn.devsync.ru"
-            handle:
-              - handler: tls
-              - handler: proxy
-                upstreams:
-                  - dial: ["localhost:5349"]
           - match:
               - tls:
                   sni:
-                    - "livekit.devsync.ru"
+                    - 'livekit-turn.devsync.ru'
+            handle:
+              - handler: tls
+              - handler: proxy
+                upstreams:
+                  - dial: ['localhost:5349']
+          - match:
+              - tls:
+                  sni:
+                    - 'livekit.devsync.ru'
             handle:
               - handler: tls
                 connection_policies:
-                  - alpn: ["http/1.1"]
+                  - alpn: ['http/1.1']
               - handler: proxy
                 upstreams:
-                  - dial: ["localhost:7880"]
+                  - dial: ['localhost:7880']

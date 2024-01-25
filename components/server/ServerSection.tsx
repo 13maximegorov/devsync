@@ -2,7 +2,7 @@
 
 import { ActionTooltip } from '@/components/ActionTooltip';
 import { useModalStore } from '@/hooks/useModalStore';
-import { ServerWithMembersWithProfiles } from '@/types';
+import { ServerWithMembersWithProfiles } from '@/types/types';
 import { ChannelType, MemberRole } from '@prisma/client';
 import { Plus, Settings } from 'lucide-react';
 

@@ -2,37 +2,37 @@
 
 import { UserAvatar } from '@/components/UserAvatar';
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
 } from '@/components/ui/dialog';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuPortal,
+    DropdownMenuSeparator,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useModalStore } from '@/hooks/useModalStore';
-import { ServerWithMembersWithProfiles } from '@/types';
+import { ServerWithMembersWithProfiles } from '@/types/types';
 import { MemberRole } from '@prisma/client';
 import axios from 'axios';
 import {
-  Check,
-  Gavel,
-  Loader2,
-  MoreVertical,
-  Shield,
-  ShieldAlert,
-  ShieldCheck,
-  ShieldQuestion,
+    Check,
+    Gavel,
+    Loader2,
+    MoreVertical,
+    Shield,
+    ShieldAlert,
+    ShieldCheck,
+    ShieldQuestion,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import qs from 'query-string';

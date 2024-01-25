@@ -1,5 +1,5 @@
 import { useSocket } from '@/components/providers/SocketProvider';
-import { MessageWithMemberWithProfile } from '@/types';
+import { MessageWithMemberWithProfile } from '@/types/types';
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 

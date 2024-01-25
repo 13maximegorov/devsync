@@ -1,23 +1,23 @@
 'use client';
 
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useModalStore } from '@/hooks/useModalStore';
-import { ServerWithMembersWithProfiles } from '@/types';
+import { ServerWithMembersWithProfiles } from '@/types/types';
 import { MemberRole } from '@prisma/client';
 import {
-  ChevronDown,
-  LogOut,
-  PlusCircle,
-  Settings,
-  Trash,
-  UserPlus,
-  Users,
+    ChevronDown,
+    LogOut,
+    PlusCircle,
+    Settings,
+    Trash,
+    UserPlus,
+    Users,
 } from 'lucide-react';
 
 interface ServerHeaderProps {

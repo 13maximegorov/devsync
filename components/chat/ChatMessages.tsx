@@ -6,7 +6,7 @@ import { useChatQuery } from '@/hooks/useChatQuery';
 import { useChatScroll } from '@/hooks/useChatScroll';
 import { useChatSocket } from '@/hooks/useChatSocket';
 import format from '@/lib/format';
-import { MessageWithMemberWithProfile } from '@/types';
+import { MessageWithMemberWithProfile } from '@/types/types';
 import { Member } from '@prisma/client';
 import { Loader2, ServerCrash } from 'lucide-react';
 import { Fragment, useRef } from 'react';

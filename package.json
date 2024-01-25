@@ -10,6 +10,7 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "prisma:studio": "npx prisma studio",
+    "dev:prisma": "npx prisma generate && npx prisma db push && npm run dev",
     "build:prisma": "npx prisma generate && npm run build",
     "start:prod": "npx prisma db push && node server.js"
   },
