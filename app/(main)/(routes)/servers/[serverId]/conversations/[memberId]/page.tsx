@@ -59,7 +59,7 @@ const ConversationPage = async ({
   const redirectUrlDisconnect = `/servers/${params.serverId}/conversations/${memberTwo.id}`;
 
   return (
-    <div className="flex h-full flex-col bg-backgorund">
+    <div className="bg-backgorund flex h-full flex-col">
       <ChatHeader
         imageUrl={otherMember.profile.imageUrl}
         name={otherMember.profile.name}

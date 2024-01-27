@@ -64,6 +64,7 @@ export const MediaRoom = ({
       video={video}
       audio={audio}
       onDisconnected={onDisconnected}
+      className="h-full"
     >
       <VideoConference />
     </LiveKitRoom>

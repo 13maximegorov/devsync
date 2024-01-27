@@ -15,6 +15,7 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { useModalStore } from '@/hooks/useModalStore';
@@ -79,12 +80,10 @@ export const MessageFileModal = () => {
       open={isModalOpen}
       onOpenChange={handleClose}
     >
-      <DialogContent className="overflow-hidden bg-white p-0 text-black">
-        <DialogHeader className="px-6 pt-8">
-          <DialogTitle className="text-center text-2xl font-bold">
-            Добавить вложение
-          </DialogTitle>
-          <DialogDescription className="text-center text-zinc-500">
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Добавить вложение</DialogTitle>
+          <DialogDescription>
             Отправить файл в виде сообщения.
           </DialogDescription>
         </DialogHeader>
@@ -93,27 +92,24 @@ export const MessageFileModal = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-8"
           >
-            <div className="space-y-8 px-6">
-              <div className="flex items-center justify-center text-center">
-                <FormField
-                  control={form.control}
-                  name="fileUrl"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <FileUpload
-                          endpoint="messageFile"
-                          value={field.value}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </div>
-            <DialogFooter className="bg-gray-100 px-6 py-4">
+            <FormField
+              control={form.control}
+              name="fileUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Файл</FormLabel>
+                  <FormControl>
+                    <FileUpload
+                      endpoint="messageFile"
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <DialogFooter>
               <Button
                 variant="primary"
                 disabled={isLoading}

@@ -28,11 +28,11 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: 'Название сервера обязательно.',
-  }),
   imageUrl: z.string().min(1, {
     message: 'Изображение сервера обязательно.',
+  }),
+  name: z.string().min(1, {
+    message: 'Название сервера обязательно.',
   }),
 });
 
@@ -48,15 +48,15 @@ export const EditServerModal = () => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: server?.name,
       imageUrl: server?.imageUrl,
+      name: server?.name,
     },
   });
 
   useEffect(() => {
     if (server) {
-      form.setValue('name', server.name);
       form.setValue('imageUrl', server.imageUrl);
+      form.setValue('name', server.name);
     }
   }, [server, form]);
 
@@ -83,12 +83,10 @@ export const EditServerModal = () => {
       open={isModalOpen}
       onOpenChange={handleClose}
     >
-      <DialogContent className="overflow-hidden bg-white p-0 text-black">
-        <DialogHeader className="px-6 pt-8">
-          <DialogTitle className="text-center text-2xl font-bold">
-            Настройки сервера
-          </DialogTitle>
-          <DialogDescription className="text-center text-zinc-500">
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Настройки сервера</DialogTitle>
+          <DialogDescription>
             Дайте название и изображение серверу. Вы всегда можете изменить его
             настройки.
           </DialogDescription>
@@ -98,47 +96,41 @@ export const EditServerModal = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-8"
           >
-            <div className="space-y-8 px-6">
-              <div className="flex items-center justify-center text-center">
-                <FormField
-                  control={form.control}
-                  name="imageUrl"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <FileUpload
-                          endpoint="serverImage"
-                          value={field.value}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xs font-bold uppercase text-zinc-500 dark:text-secondary/70">
-                      Название сервера
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={isLoading}
-                        className="border-0 bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0"
-                        placeholder="Введите название сервера"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <DialogFooter className="bg-gray-100 px-6 py-4">
+            <FormField
+              control={form.control}
+              name="imageUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Изображение сервера</FormLabel>
+                  <FormControl>
+                    <FileUpload
+                      endpoint="serverImage"
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Название сервера</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isLoading}
+                      placeholder="Введите название сервера"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <DialogFooter>
               <Button
                 variant="primary"
                 disabled={isLoading}

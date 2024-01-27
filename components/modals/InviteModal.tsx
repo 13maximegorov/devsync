@@ -56,20 +56,15 @@ export const InviteModal = () => {
       open={isModalOpen}
       onOpenChange={onClose}
     >
-      <DialogContent className="overflow-hidden bg-white p-0 text-black">
-        <DialogHeader className="px-6 pt-8">
-          <DialogTitle className="text-center text-2xl font-bold">
-            Пригласить новых участников
-          </DialogTitle>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Пригласить новых участников</DialogTitle>
         </DialogHeader>
-        <div className="p-6">
-          <Label className="text-xs font-bold uppercase text-zinc-500 dark:text-secondary/70">
-            Cсылка для приглашения на сервер
-          </Label>
+        <div>
+          <Label>Cсылка для приглашения на сервер</Label>
           <div className="mt-2 flex items-center gap-x-2">
             <Input
               disabled={isLoading}
-              className="border-0 bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0"
               value={inviteUrl}
               readOnly
             />
@@ -90,7 +85,7 @@ export const InviteModal = () => {
             disabled={isLoading}
             variant="link"
             size="sm"
-            className="mt-4 text-xs text-zinc-500"
+            className="mt-4 text-xs text-muted-foreground"
           >
             Сгенерировать новую ссылку
             <RefreshCw className="ml-2 h-4 w-4" />

@@ -1,6 +1,7 @@
 'use client';
 
 import { UserAvatar } from '@/components/UserAvatar';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -99,20 +100,18 @@ export const MembersModal = () => {
       open={isModalOpen}
       onOpenChange={onClose}
     >
-      <DialogContent className="overflow-hidden bg-white text-black">
-        <DialogHeader className="px-6 pt-8">
-          <DialogTitle className="text-center text-2xl font-bold">
-            Управлять участниками
-          </DialogTitle>
-          <DialogDescription className="text-center text-zinc-500">
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Управлять участниками</DialogTitle>
+          <DialogDescription>
             {server?.members?.length} участников
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="mt-8 max-h-[420px] pr-6">
+        <ScrollArea className="max-h-[420px]">
           {server?.members?.map((member) => (
             <div
               key={member.id}
-              className="mb-6 flex items-center gap-x-2"
+              className="mb-6 flex items-center gap-x-2 pr-2"
             >
               <UserAvatar src={member.profile.imageUrl} />
               <div className="flex flex-col gap-y-1">
@@ -120,14 +119,22 @@ export const MembersModal = () => {
                   {member.profile.name}
                   {roleIconMap[member.role]}
                 </div>
-                <p className="text-xs text-zinc-500">{member.profile.email}</p>
+                <p className="text-xs text-muted-foreground">
+                  {member.profile.email}
+                </p>
               </div>
               {server.profileId !== member.profileId &&
                 loadingId !== member.id && (
                   <div className="ml-auto">
                     <DropdownMenu>
-                      <DropdownMenuTrigger>
-                        <MoreVertical className="h-4 w-4 text-zinc-500" />
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          className="z-10"
+                        >
+                          <MoreVertical className="h-4 w-4" />
+                        </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent side="left">
                         <DropdownMenuSub>
@@ -172,7 +179,7 @@ export const MembersModal = () => {
                   </div>
                 )}
               {loadingId === member.id && (
-                <Loader2 className="ml-auto h-4 w-4 animate-spin text-zinc-500" />
+                <Loader2 className="ml-auto h-4 w-4 animate-spin text-muted-foreground" />
               )}
             </div>
           ))}

@@ -32,13 +32,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
         lang="en"
         suppressHydrationWarning
       >
-        <body
-          className={cn(
-            'font-sans',
-            fontSans.variable,
-            'bg-backgorund',
-          )}
-        >
+        <body className={cn('font-sans', fontSans.variable, 'bg-backgorund')}>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"

@@ -46,23 +46,19 @@ export const DeleteMessageModal = () => {
       open={isModalOpen}
       onOpenChange={onClose}
     >
-      <DialogContent className="overflow-hidden bg-white p-0 text-black">
-        <DialogHeader className="px-6 pt-8">
-          <DialogTitle className="text-center text-2xl font-bold">
-            Удалить сообщение
-          </DialogTitle>
-          <DialogDescription className="text-center text-zinc-500">
-            Вы уверены, что хотите это сделать?
-            <br />
-            Сообщение будет удалено безвозвратно.
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Удалить сообщение</DialogTitle>
+          <DialogDescription>
+            Вы уверены, что хотите это сделать? Сообщение будет удалено
+            безвозвратно.
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="bg-gray-100 px-6 py-4">
+        <DialogFooter>
           <div className="flex w-full items-center justify-between">
             <Button
               disabled={isLoading}
               onClick={onClose}
-              variant="ghost"
             >
               Отменить
             </Button>

@@ -52,12 +52,10 @@ export const DeleteChannelModal = () => {
       open={isModalOpen}
       onOpenChange={onClose}
     >
-      <DialogContent className="overflow-hidden bg-white p-0 text-black">
-        <DialogHeader className="px-6 pt-8">
-          <DialogTitle className="text-center text-2xl font-bold">
-            Удалить канал
-          </DialogTitle>
-          <DialogDescription className="text-center text-zinc-500">
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Удалить канал</DialogTitle>
+          <DialogDescription>
             Вы уверены, что хотите безвозвратно удалить канал{' '}
             <span className="font-semibold text-indigo-500">
               #{channel?.name}
@@ -65,12 +63,11 @@ export const DeleteChannelModal = () => {
             ?
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="bg-gray-100 px-6 py-4">
+        <DialogFooter>
           <div className="flex w-full items-center justify-between">
             <Button
               disabled={isLoading}
               onClick={onClose}
-              variant="ghost"
             >
               Отменить
             </Button>

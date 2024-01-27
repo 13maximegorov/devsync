@@ -44,12 +44,10 @@ export const DeleteServerModal = () => {
       open={isModalOpen}
       onOpenChange={onClose}
     >
-      <DialogContent className="overflow-hidden bg-white p-0 text-black">
-        <DialogHeader className="px-6 pt-8">
-          <DialogTitle className="text-center text-2xl font-bold">
-            Удалить сервер
-          </DialogTitle>
-          <DialogDescription className="text-center text-zinc-500">
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Удалить сервер</DialogTitle>
+          <DialogDescription>
             Вы уверены, что хотите безвозвратно удалить сервер{' '}
             <span className="font-semibold text-indigo-500">
               {server?.name}
@@ -57,12 +55,11 @@ export const DeleteServerModal = () => {
             ?
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="bg-gray-100 px-6 py-4">
+        <DialogFooter>
           <div className="flex w-full items-center justify-between">
             <Button
               disabled={isLoading}
               onClick={onClose}
-              variant="ghost"
             >
               Отменить
             </Button>
