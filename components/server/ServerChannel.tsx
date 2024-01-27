@@ -44,18 +44,12 @@ export const ServerChannel = ({
     <button
       onClick={onClick}
       className={cn(
-        'group mb-1 flex w-[232px] items-center gap-x-2 rounded-md px-2 py-2 transition hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50',
-        params?.channelId === channel.id && 'bg-zinc-700/20 dark:bg-zinc-700',
+        'group z-10 mb-1 flex w-[231px] items-center gap-x-2 rounded px-2 py-2 transition hover:bg-accent',
+        params?.channelId === channel.id && 'bg-accent',
       )}
     >
-      <Icon className="h-5 w-5 shrink-0 text-zinc-500 dark:text-zinc-400" />
-      <p
-        className={cn(
-          'truncate text-sm font-semibold text-zinc-500 transition group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300',
-          params?.channelId === channel.id &&
-            'text-primary dark:text-zinc-200 dark:group-hover:text-white',
-        )}
-      >
+      <Icon className="h-5 w-5 shrink-0" />
+      <p className="truncate text-sm font-semibold group-hover:text-accent-foreground">
         {channel.name}
       </p>
       {channel.name.toLowerCase() !== 'основной' &&
@@ -64,19 +58,19 @@ export const ServerChannel = ({
             <ActionTooltip label="Редактировать">
               <Edit
                 onClick={(e) => onAction(e, 'editChannel')}
-                className="h-4 w-4 text-zinc-500 transition hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300"
+                className="h-4 w-4 text-muted-foreground transition hover:text-foreground"
               />
             </ActionTooltip>
             <ActionTooltip label="Удалить">
               <Trash
                 onClick={(e) => onAction(e, 'deleteChannel')}
-                className="h-4 w-4 text-zinc-500 transition hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300"
+                className="h-4 w-4 text-muted-foreground transition hover:text-foreground"
               />
             </ActionTooltip>
           </div>
         )}
       {channel.name.toLowerCase() === 'основной' && (
-        <Lock className="ml-auto h-4 w-4 text-zinc-500 dark:text-zinc-400" />
+        <Lock className="ml-auto h-4 w-4" />
       )}
     </button>
   );

@@ -17,7 +17,7 @@ export const ChatWelcome = ({ name, type }: ChatWelcomeProps) => {
         {type === 'channel' ? 'Добро пожаловать в #' : ''}
         {name}
       </p>
-      <p className="text-sm text-zinc-600 dark:text-zinc-400">
+      <p className="text-sm text-muted-foreground">
         {type === 'channel'
           ? `Это начало канала #${name}`
           : `Это начало Вашего разговора с ${name}`}

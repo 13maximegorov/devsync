@@ -20,7 +20,7 @@ export const SocketIndicator = () => {
   return (
     <Badge
       variant="outline"
-      className="border-none bg-emerald-600 text-white"
+      className="border-none bg-green-600 text-white"
     >
       Стабильное соединение
     </Badge>

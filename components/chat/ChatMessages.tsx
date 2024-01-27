@@ -69,10 +69,8 @@ export const ChatMessages = ({
   if (status === 'pending') {
     return (
       <div className="flex flex-1 flex-col items-center justify-center">
-        <Loader2 className="my-4 h-7 w-7 animate-spin text-zinc-500" />
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">
-          Загрузка сообщений...
-        </p>
+        <Loader2 className="my-4 h-7 w-7 animate-spin text-muted-foreground" />
+        <p className="text-xs text-muted-foreground">Загрузка сообщений...</p>
       </div>
     );
   }
@@ -80,10 +78,8 @@ export const ChatMessages = ({
   if (status === 'error') {
     return (
       <div className="flex flex-1 flex-col items-center justify-center">
-        <ServerCrash className="my-4 h-7 w-7 text-zinc-500" />
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">
-          Что-то пошло не так!
-        </p>
+        <ServerCrash className="my-4 h-7 w-7 text-muted-foreground" />
+        <p className="text-xs text-muted-foreground">Что-то пошло не так!</p>
       </div>
     );
   }
@@ -103,11 +99,11 @@ export const ChatMessages = ({
       {hasNextPage && (
         <div className="flex justify-center">
           {isFetchingNextPage ? (
-            <Loader2 className="my-4 h-6 w-6 animate-spin text-zinc-500" />
+            <Loader2 className="my-4 h-6 w-6 animate-spin text-muted-foreground" />
           ) : (
             <button
               onClick={() => fetchNextPage()}
-              className="my-4 text-xs text-zinc-500 transition hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300"
+              className="my-4 text-xs text-muted-foreground transition hover:text-foreground"
             >
               Загрузить предыдущие сообщения
             </button>

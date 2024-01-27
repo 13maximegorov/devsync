@@ -29,7 +29,7 @@ export const ActionTooltip = ({
           side={side}
           align={align}
         >
-          <p className="text-sm font-semibold">{label}</p>
+          <p>{label}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

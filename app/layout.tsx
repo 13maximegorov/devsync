@@ -36,7 +36,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
           className={cn(
             'font-sans',
             fontSans.variable,
-            'bg-white dark:bg-[#313338]',
+            'bg-backgorund',
           )}
         >
           <ThemeProvider

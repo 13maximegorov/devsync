@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import {
   CommandDialog,
   CommandEmpty,
@@ -8,6 +9,7 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command';
+import { cn } from '@/lib/utils';
 import { Search } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
@@ -63,18 +65,19 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
 
   return (
     <>
-      <button
+      <Button
+        variant="outline"
+        className={cn(
+          'relative h-9 w-full justify-start bg-background text-sm font-normal text-muted-foreground shadow-none',
+        )}
         onClick={() => setOpen(true)}
-        className="group flex w-full items-center gap-x-2 rounded-md px-2 py-2 transition hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50"
       >
-        <Search className="h-4 w-4 text-zinc-500 dark:text-zinc-400" />
-        <p className="text-sm font-semibold text-zinc-500 transition group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300">
-          Поиск
-        </p>
-        <kbd className="pointer-events-none ml-auto inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
-          <span>⌘</span>K
+        <Search className="absolute left-2 h-4 w-4" />
+        <span className="ml-3">Поиск</span>
+        <kbd className="pointer-events-none absolute right-1 h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium">
+          <span className="text-xs">⌘</span>K
         </kbd>
-      </button>
+      </Button>
       <CommandDialog
         open={open}
         onOpenChange={setOpen}

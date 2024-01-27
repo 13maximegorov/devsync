@@ -26,7 +26,10 @@ export const ModeToggle = (props: ButtonProps) => {
           <span className="sr-only">Переключить тему</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent
+        align="end"
+        side="right"
+      >
         <DropdownMenuItem onClick={() => setTheme('light')}>
           Светлая
         </DropdownMenuItem>

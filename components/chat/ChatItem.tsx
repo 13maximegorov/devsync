@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Member, MemberRole, Profile } from '@prisma/client';
 import axios from 'axios';
-import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from 'lucide-react';
+import { Crown, Edit, FileIcon, ShieldCheck, Trash } from 'lucide-react';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import qs from 'query-string';
@@ -44,7 +44,7 @@ const roleIconMap = {
   [MemberRole.MODERATOR]: (
     <ShieldCheck className="ml-2 h-4 w-4 text-indigo-500" />
   ),
-  [MemberRole.ADMIN]: <ShieldAlert className="ml-2 h-4 w-4 text-rose-500" />,
+  [MemberRole.ADMIN]: <Crown className="ml-2 h-4 w-4 text-yellow-500" />,
 };
 
 const formSchema = z.object({
@@ -132,7 +132,7 @@ export const ChatItem = ({
   const isImage = !isPDF && fileUrl;
 
   return (
-    <div className="group relative flex w-full items-center p-4 transition hover:bg-black/5">
+    <div className="group relative flex w-full items-center p-4 transition hover:bg-accent/50">
       <div className="group flex w-full items-start gap-x-2">
         <div
           onClick={onMemberClick}
@@ -153,16 +153,14 @@ export const ChatItem = ({
                 {roleIconMap[member.role]}
               </ActionTooltip>
             </div>
-            <span className="text-xs text-zinc-500 dark:text-zinc-400">
-              {timestamp}
-            </span>
+            <span className="text-xs text-muted-foreground">{timestamp}</span>
           </div>
           {isImage && (
             <a
               href={fileUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative mt-2 flex aspect-square h-48 w-48 items-center overflow-hidden rounded-md border bg-secondary"
+              className="relative mt-2 flex aspect-square h-48 w-48 items-center overflow-hidden rounded-md border bg-muted"
             >
               <Image
                 fill
@@ -173,13 +171,13 @@ export const ChatItem = ({
             </a>
           )}
           {isPDF && (
-            <div className="relative mt-2 flex items-center rounded-md bg-background/10 p-2">
-              <FileIcon className="h-10 w-10 fill-indigo-200 stroke-indigo-400" />
+            <div className="relative mt-2 flex items-center rounded-md bg-muted p-2">
+              <FileIcon className="h-10 w-10 fill-indigo-200 stroke-indigo-500" />
               <a
                 href={fileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-2 text-sm text-indigo-500 hover:underline dark:text-indigo-400"
+                className="ml-2 text-sm text-indigo-500 hover:underline"
               >
                 PDF файл
               </a>
@@ -188,14 +186,13 @@ export const ChatItem = ({
           {!fileUrl && !isEditing && (
             <p
               className={cn(
-                'text-sm text-zinc-600 dark:text-zinc-300',
-                deleted &&
-                  'mt-1 text-xs italic text-zinc-500 dark:text-zinc-400',
+                'text-sm',
+                deleted && 'mt-1 text-xs italic text-muted-foreground',
               )}
             >
               {content}
               {isUpdated && !deleted && (
-                <span className="mx-2 text-[10px] text-zinc-500 dark:text-zinc-400">
+                <span className="mx-2 text-[10px] text-muted-foreground">
                   (изменено)
                 </span>
               )}
@@ -216,7 +213,6 @@ export const ChatItem = ({
                         <div className="relative w-full">
                           <Input
                             disabled={isLoading}
-                            className="border-0 border-none bg-zinc-200/90 p-2 text-zinc-600 focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-zinc-700/75 dark:text-zinc-200"
                             placeholder="Изменить сообщение"
                             {...field}
                           />
@@ -227,26 +223,25 @@ export const ChatItem = ({
                 />
                 <Button
                   disabled={isLoading}
-                  size="sm"
                   variant="primary"
                 >
                   Сохранить
                 </Button>
               </form>
-              <span className="mt-1 text-[10px] text-zinc-400">
-                Нажмите escape для отмены, enter для сохранения
+              <span className="mt-1 text-[10px] text-muted-foreground">
+                Нажмите Escape для отмены, Enter для сохранения
               </span>
             </Form>
           )}
         </div>
       </div>
       {canDeleteMessage && (
-        <div className="absolute -top-2 right-5 hidden items-center gap-x-2 rounded-sm border bg-white p-1 group-hover:flex dark:bg-zinc-800">
+        <div className="absolute -top-2 right-5 hidden items-center gap-x-2 rounded-sm border bg-background p-1 group-hover:flex">
           {canEditMessage && (
             <ActionTooltip label="Изменить">
               <Edit
                 onClick={() => setIsEditing(true)}
-                className="ml-auto h-4 w-4 cursor-pointer text-zinc-500 transition hover:text-zinc-600 dark:hover:text-zinc-300"
+                className="ml-auto h-4 w-4 cursor-pointer text-muted-foreground transition hover:text-foreground"
               />
             </ActionTooltip>
           )}
@@ -258,7 +253,7 @@ export const ChatItem = ({
                   query: socketQuery,
                 })
               }
-              className="ml-auto h-4 w-4 cursor-pointer text-zinc-500 transition hover:text-zinc-600 dark:hover:text-zinc-300"
+              className="ml-auto h-4 w-4 cursor-pointer text-muted-foreground transition hover:text-foreground"
             />
           </ActionTooltip>
         </div>

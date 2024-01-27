@@ -61,7 +61,7 @@ const ChannelPage = async ({ params }: ChannelPageProps) => {
   const redirectUrlDisconnect = `/servers/${params.serverId}/channels/${generalChannel?.id}`;
 
   return (
-    <div className="flex h-full flex-col bg-white dark:bg-[#313338]">
+    <div className="bg-backgorund flex h-full flex-col">
       <ChatHeader
         name={channel.name}
         serverId={channel.serverId}

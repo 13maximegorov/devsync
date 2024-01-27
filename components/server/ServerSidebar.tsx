@@ -4,11 +4,10 @@ import { ServerMember } from '@/components/server/ServerMember';
 import { ServerSearch } from '@/components/server/ServerSearch';
 import { ServerSection } from '@/components/server/ServerSection';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
 import { currentProfile } from '@/lib/current-profile';
 import db from '@/lib/db';
 import { ChannelType, MemberRole } from '@prisma/client';
-import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from 'lucide-react';
+import { Crown, Hash, Mic, ShieldCheck, Video } from 'lucide-react';
 import { redirect } from 'next/navigation';
 
 interface ServerSidebarProps {
@@ -26,7 +25,7 @@ const roleIconMap = {
   [MemberRole.MODERATOR]: (
     <ShieldCheck className="mr-2 h-4 w-4 text-indigo-500" />
   ),
-  [MemberRole.ADMIN]: <ShieldAlert className="mr-2 h-4 w-4 text-rose-500" />,
+  [MemberRole.ADMIN]: <Crown className="mr-2 h-4 w-4 text-yellow-500" />,
 };
 
 export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
@@ -81,55 +80,54 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
     ?.role;
 
   return (
-    <div className="flex h-full w-full flex-col bg-[#F2F3F5] text-primary dark:bg-[#2B2D31]">
+    <div className="flex h-full w-full flex-col border-r border-border bg-background text-primary">
       <ServerHeader
         server={server}
         role={role}
       />
+      <div className="my-4 px-3">
+        <ServerSearch
+          data={[
+            {
+              label: 'Текстовые каналы',
+              type: 'channel',
+              data: textChannels?.map((channel) => ({
+                id: channel.id,
+                name: channel.name,
+                icon: iconMap[channel.type],
+              })),
+            },
+            {
+              label: 'Голосовые каналы',
+              type: 'channel',
+              data: audioChannels?.map((channel) => ({
+                id: channel.id,
+                name: channel.name,
+                icon: iconMap[channel.type],
+              })),
+            },
+            {
+              label: 'Видеоканалы',
+              type: 'channel',
+              data: videoChannels?.map((channel) => ({
+                id: channel.id,
+                name: channel.name,
+                icon: iconMap[channel.type],
+              })),
+            },
+            {
+              label: 'Участники',
+              type: 'member',
+              data: members?.map((member) => ({
+                id: member.id,
+                name: member.profile.name,
+                icon: roleIconMap[member.role],
+              })),
+            },
+          ]}
+        />
+      </div>
       <ScrollArea className="flex-1 px-3">
-        <div className="mt-2">
-          <ServerSearch
-            data={[
-              {
-                label: 'Текстовые каналы',
-                type: 'channel',
-                data: textChannels?.map((channel) => ({
-                  id: channel.id,
-                  name: channel.name,
-                  icon: iconMap[channel.type],
-                })),
-              },
-              {
-                label: 'Голосовые каналы',
-                type: 'channel',
-                data: audioChannels?.map((channel) => ({
-                  id: channel.id,
-                  name: channel.name,
-                  icon: iconMap[channel.type],
-                })),
-              },
-              {
-                label: 'Видеоканалы',
-                type: 'channel',
-                data: videoChannels?.map((channel) => ({
-                  id: channel.id,
-                  name: channel.name,
-                  icon: iconMap[channel.type],
-                })),
-              },
-              {
-                label: 'Участники',
-                type: 'member',
-                data: members?.map((member) => ({
-                  id: member.id,
-                  name: member.profile.name,
-                  icon: roleIconMap[member.role],
-                })),
-              },
-            ]}
-          />
-        </div>
-        <Separator className="my-2 rounded-md bg-zinc-200 dark:bg-zinc-700" />
         {!!textChannels?.length && (
           <div className="mb-2">
             <ServerSection
