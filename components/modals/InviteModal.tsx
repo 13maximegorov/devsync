@@ -67,6 +67,7 @@ export const InviteModal = () => {
               disabled={isLoading}
               value={inviteUrl}
               readOnly
+              className="flex-1"
             />
             <Button
               disabled={isLoading}

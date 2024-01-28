@@ -35,7 +35,7 @@ export const ServerMember = ({ member, server }: ServerMemberProps) => {
     <button
       onClick={onClick}
       className={cn(
-        'group mb-1 flex w-[231px] items-center gap-x-2 rounded-md px-2 py-2 transition hover:bg-accent',
+        'group mb-1 flex w-[232px] items-center gap-x-2 rounded-md px-2 py-2 transition hover:bg-accent',
         params?.memberId === member.id && 'bg-accent',
       )}
     >

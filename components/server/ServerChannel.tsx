@@ -44,7 +44,7 @@ export const ServerChannel = ({
     <button
       onClick={onClick}
       className={cn(
-        'group z-10 mb-1 flex w-[231px] items-center gap-x-2 rounded px-2 py-2 transition hover:bg-accent',
+        'group z-10 mb-1 flex w-[232px] items-center gap-x-2 rounded px-2 py-2 transition hover:bg-accent',
         params?.channelId === channel.id && 'bg-accent',
       )}
     >
