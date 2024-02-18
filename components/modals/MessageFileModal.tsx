@@ -28,7 +28,7 @@ import * as z from 'zod';
 
 const formSchema = z.object({
   fileUrl: z.string().min(1, {
-    message: 'Вложение обязательно.',
+    message: 'Это поле обязательно.',
   }),
 });
 

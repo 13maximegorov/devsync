@@ -1,6 +1,6 @@
 'use client';
 
-import { useUser } from '@clerk/nextjs';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { LiveKitRoom, VideoConference } from '@livekit/components-react';
 import '@livekit/components-styles';
 import { Loader2 } from 'lucide-react';
@@ -20,19 +20,15 @@ export const MediaRoom = ({
   audio,
   redirectUrlDisconnect,
 }: MediaRoomProps) => {
-  const { user } = useUser();
+  const user = useCurrentUser();
   const [token, setToken] = useState('');
   const router = useRouter();
 
   useEffect(() => {
-    if (!user?.firstName || !user.lastName) return;
-
-    const name = `${user.firstName} ${user.lastName}`;
-
     (async () => {
       try {
         const resp = await fetch(
-          `/api/livekit?room=${chatId}&username=${name}`,
+          `/api/livekit?room=${chatId}&username=${user?.name}`,
         );
         const data = await resp.json();
         setToken(data.token);
@@ -40,7 +36,7 @@ export const MediaRoom = ({
         console.log(error);
       }
     })();
-  }, [chatId, user?.firstName, user?.lastName]);
+  }, [chatId, user?.name]);
 
   const onDisconnected = () => {
     router.push(redirectUrlDisconnect);

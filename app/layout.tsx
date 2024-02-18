@@ -1,12 +1,12 @@
+import { auth } from '@/auth';
 import { ModalProvider } from '@/components/providers/ModalProvider';
 import { QueryProvider } from '@/components/providers/QueryProvider';
 import { SocketProvider } from '@/components/providers/SocketProvider';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
-import { ruRU } from '@clerk/localizations';
-import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
+import { SessionProvider } from 'next-auth/react';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 
@@ -25,9 +25,11 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-const RootLayout = ({ children }: RootLayoutProps) => {
+const RootLayout = async ({ children }: RootLayoutProps) => {
+  const session = await auth();
+
   return (
-    <ClerkProvider localization={ruRU}>
+    <SessionProvider session={session}>
       <html
         lang="en"
         suppressHydrationWarning
@@ -47,7 +49,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
           </ThemeProvider>
         </body>
       </html>
-    </ClerkProvider>
+    </SessionProvider>
   );
 };
 

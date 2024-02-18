@@ -1,4 +1,4 @@
-import { currentProfile } from '@/lib/current-profile';
+import { currentUser } from '@/lib/auth';
 import db from '@/lib/db';
 import { NextResponse } from 'next/server';
 
@@ -7,9 +7,9 @@ export async function PATCH(
   { params }: { params: { serverId: string } },
 ) {
   try {
-    const profile = await currentProfile();
+    const user = await currentUser();
 
-    if (!profile) {
+    if (!user) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
@@ -20,19 +20,19 @@ export async function PATCH(
     const server = await db.server.update({
       where: {
         id: params.serverId,
-        profileId: {
-          not: profile.id,
+        userId: {
+          not: user.id,
         },
         members: {
           some: {
-            profileId: profile.id,
+            userId: user.id,
           },
         },
       },
       data: {
         members: {
           deleteMany: {
-            profileId: profile.id,
+            userId: user.id,
           },
         },
       },
@@ -40,7 +40,6 @@ export async function PATCH(
 
     return NextResponse.json(server);
   } catch (error) {
-    console.log('[SERVER_ID_LEAVE]', error);
     return new NextResponse('Internal Error', { status: 500 });
   }
 }

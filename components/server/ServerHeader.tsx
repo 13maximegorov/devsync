@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useModalStore } from '@/hooks/useModalStore';
-import { ServerWithMembersWithProfiles } from '@/types/types';
+import { ServerWithMembersWithUsers } from '@/types/types';
 import { MemberRole } from '@prisma/client';
 import {
   ChevronDown,
@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 
 interface ServerHeaderProps {
-  server: ServerWithMembersWithProfiles;
+  server: ServerWithMembersWithUsers;
   role?: MemberRole;
 }
 

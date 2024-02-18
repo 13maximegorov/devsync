@@ -15,7 +15,7 @@ import * as z from 'zod';
 interface ChatInputProps {
   apiUrl: string;
   query: Record<string, string>;
-  name: string;
+  name: string | null;
   type: 'conversation' | 'channel';
 }
 

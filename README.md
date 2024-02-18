@@ -25,16 +25,8 @@
 
 ### Development
 
-#### Первый вариант
-
-```zsh
-npm ci
+```shell
+npm i
 npm run dev
 docker-compose up -d
-```
-
-#### Второй вариант
-
-```zsh
-docker-compose -f "docker-compose.dev.yaml" up -d
 ```

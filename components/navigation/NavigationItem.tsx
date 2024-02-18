@@ -7,11 +7,11 @@ import { useParams, useRouter } from 'next/navigation';
 
 interface NavigationItemProps {
   id: string;
-  imageUrl: string;
+  image: string;
   name: string;
 }
 
-export const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
+export const NavigationItem = ({ id, image, name }: NavigationItemProps) => {
   const params = useParams<{ serverId: string }>();
   const router = useRouter();
 
@@ -45,7 +45,7 @@ export const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
         >
           <Image
             fill
-            src={imageUrl}
+            src={image}
             alt="Server"
             className="object-cover"
           />

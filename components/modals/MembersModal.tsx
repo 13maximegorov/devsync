@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useModalStore } from '@/hooks/useModalStore';
-import { ServerWithMembersWithProfiles } from '@/types/types';
+import { ServerWithMembersWithUsers } from '@/types/types';
 import { MemberRole } from '@prisma/client';
 import axios from 'axios';
 import {
@@ -51,7 +51,7 @@ export const MembersModal = () => {
   const [loadingId, setLoadingId] = useState('');
 
   const isModalOpen = isOpen && type === 'members';
-  const { server } = data as { server: ServerWithMembersWithProfiles };
+  const { server } = data as { server: ServerWithMembersWithUsers };
 
   const onKick = async (memberId: string) => {
     try {
@@ -114,74 +114,70 @@ export const MembersModal = () => {
                 key={member.id}
                 className="mb-6 flex items-center gap-x-2"
               >
-                <UserAvatar src={member.profile.imageUrl} />
+                <UserAvatar src={member.user.image} />
                 <div className="flex flex-col gap-y-1">
                   <div className="flex items-center gap-x-1 text-xs font-semibold">
-                    {member.profile.name}
+                    {member.user.name}
                     {roleIconMap[member.role]}
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    {member.profile.email}
+                    {member.user.email}
                   </p>
                 </div>
-                {server.profileId !== member.profileId &&
-                  loadingId !== member.id && (
-                    <div className="ml-auto">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            size="icon"
-                            variant="ghost"
-                            className="z-10"
-                          >
-                            <MoreVertical className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent side="left">
-                          <DropdownMenuSub>
-                            <DropdownMenuSubTrigger className="flex items-center">
-                              <ShieldQuestion className="mr-2 h-4 w-4" />
-                              <span>Роль</span>
-                            </DropdownMenuSubTrigger>
-                            <DropdownMenuPortal>
-                              <DropdownMenuSubContent className="w-40">
-                                <DropdownMenuItem
-                                  onClick={() =>
-                                    onRoleChange(member.id, MemberRole.GUEST)
-                                  }
-                                >
-                                  <Shield className="mr-2 h-4 w-4" />
-                                  Гость
-                                  {member.role === MemberRole.GUEST && (
-                                    <Check className="ml-auto h-4 w-4" />
-                                  )}
-                                </DropdownMenuItem>
-                                <DropdownMenuItem
-                                  onClick={() =>
-                                    onRoleChange(
-                                      member.id,
-                                      MemberRole.MODERATOR,
-                                    )
-                                  }
-                                >
-                                  <ShieldCheck className="mr-2 h-4 w-4" />
-                                  Модератор
-                                  {member.role === MemberRole.MODERATOR && (
-                                    <Check className="ml-auto h-4 w-4" />
-                                  )}
-                                </DropdownMenuItem>
-                              </DropdownMenuSubContent>
-                            </DropdownMenuPortal>
-                          </DropdownMenuSub>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem onClick={() => onKick(member.id)}>
-                            <Gavel className="mr-2 h-4 w-4" />
-                            Исключить
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </div>
-                  )}
+                {server.userId !== member.userId && loadingId !== member.id && (
+                  <div className="ml-auto">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          className="z-10"
+                        >
+                          <MoreVertical className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent side="left">
+                        <DropdownMenuSub>
+                          <DropdownMenuSubTrigger className="flex items-center">
+                            <ShieldQuestion className="mr-2 h-4 w-4" />
+                            <span>Роль</span>
+                          </DropdownMenuSubTrigger>
+                          <DropdownMenuPortal>
+                            <DropdownMenuSubContent className="w-40">
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  onRoleChange(member.id, MemberRole.GUEST)
+                                }
+                              >
+                                <Shield className="mr-2 h-4 w-4" />
+                                Гость
+                                {member.role === MemberRole.GUEST && (
+                                  <Check className="ml-auto h-4 w-4" />
+                                )}
+                              </DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  onRoleChange(member.id, MemberRole.MODERATOR)
+                                }
+                              >
+                                <ShieldCheck className="mr-2 h-4 w-4" />
+                                Модератор
+                                {member.role === MemberRole.MODERATOR && (
+                                  <Check className="ml-auto h-4 w-4" />
+                                )}
+                              </DropdownMenuItem>
+                            </DropdownMenuSubContent>
+                          </DropdownMenuPortal>
+                        </DropdownMenuSub>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => onKick(member.id)}>
+                          <Gavel className="mr-2 h-4 w-4" />
+                          Исключить
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                )}
                 {loadingId === member.id && (
                   <Loader2 className="ml-auto h-4 w-4 animate-spin text-muted-foreground" />
                 )}

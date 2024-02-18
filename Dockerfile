@@ -15,12 +15,6 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-FROM base AS dev
-
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
@@ -35,7 +29,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 # RUN yarn build
 
 # If using npm comment out above and use below instead
-RUN npm run build:prisma
+RUN npm run build:prisma:prod
 
 # Production image, copy all the files and run next
 FROM base AS runner

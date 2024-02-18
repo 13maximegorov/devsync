@@ -38,7 +38,7 @@ const formSchema = z.object({
   name: z
     .string()
     .min(1, {
-      message: 'Название канала обязательно.',
+      message: 'Это поле обязательно.',
     })
     .refine((name) => name.toLowerCase() !== 'основной', {
       message: 'Название канала не может быть "Основной"',

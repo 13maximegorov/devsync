@@ -1,17 +1,17 @@
 import { ModeToggle } from '@/components/ModeToggle';
+import { UserButton } from '@/components/auth/UserButton';
 import { NavigationAction } from '@/components/navigation/NavigationAction';
+import { NavigationItem } from '@/components/navigation/NavigationItem';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import { currentProfile } from '@/lib/current-profile';
+import { currentUser } from '@/lib/auth';
 import db from '@/lib/db';
-import { UserButton } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
-import { NavigationItem } from './NavigationItem';
 
 export const NavigationSidebar = async () => {
-  const profile = await currentProfile();
+  const user = await currentUser();
 
-  if (!profile) {
+  if (!user) {
     return redirect('/');
   }
 
@@ -19,7 +19,7 @@ export const NavigationSidebar = async () => {
     where: {
       members: {
         some: {
-          profileId: profile.id,
+          userId: user.id,
         },
       },
     },
@@ -41,21 +41,14 @@ export const NavigationSidebar = async () => {
             <NavigationItem
               id={server.id}
               name={server.name}
-              imageUrl={server.imageUrl}
+              image={server.image}
             />
           </div>
         ))}
       </ScrollArea>
       <div className="mt-auto flex flex-col items-center gap-y-4 pb-3">
         <ModeToggle />
-        <UserButton
-          afterSignOutUrl="/"
-          appearance={{
-            elements: {
-              avatarBox: 'h-[48px] w-[48px]',
-            },
-          }}
-        />
+        <UserButton />
       </div>
     </div>
   );

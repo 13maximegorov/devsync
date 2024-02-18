@@ -6,16 +6,16 @@ import { Hash } from 'lucide-react';
 
 interface ChatHeaderProps {
   serverId: string;
-  name: string;
+  name: string | null;
   type: 'channel' | 'conversation';
-  imageUrl?: string;
+  image?: string | null;
 }
 
 export const ChatHeader = ({
   serverId,
   name,
   type,
-  imageUrl,
+  image,
 }: ChatHeaderProps) => {
   return (
     <div className="flex h-12 items-center border-b border-border px-3">
@@ -25,7 +25,7 @@ export const ChatHeader = ({
       )}
       {type === 'conversation' && (
         <UserAvatar
-          src={imageUrl}
+          src={image}
           className="mr-2 h-8 w-8 md:h-8 md:w-8"
         />
       )}

@@ -1,4 +1,3 @@
-import { currentProfilePages } from '@/lib/current-profile-pages';
 import db from '@/lib/db';
 import { NextApiResponseServerIO } from '@/types/types';
 import { MemberRole } from '@prisma/client';
@@ -9,6 +8,7 @@ interface NextApiRequestExtends extends NextApiRequest {
     content: string;
   };
   query: {
+    userId: string;
     conversationId: string;
     directMessageId: string;
   };
@@ -23,11 +23,10 @@ const handler = async (
   }
 
   try {
-    const profile = await currentProfilePages(req);
     const { content } = req.body;
-    const { conversationId, directMessageId } = req.query;
+    const { userId, conversationId, directMessageId } = req.query;
 
-    if (!profile) {
+    if (!userId) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
@@ -41,12 +40,12 @@ const handler = async (
         OR: [
           {
             memberOne: {
-              profileId: profile.id,
+              userId: userId,
             },
           },
           {
             memberTwo: {
-              profileId: profile.id,
+              userId: userId,
             },
           },
         ],
@@ -54,12 +53,12 @@ const handler = async (
       include: {
         memberOne: {
           include: {
-            profile: true,
+            user: true,
           },
         },
         memberTwo: {
           include: {
-            profile: true,
+            user: true,
           },
         },
       },
@@ -70,7 +69,7 @@ const handler = async (
     }
 
     const member =
-      conversation.memberOne.profileId === profile.id
+      conversation.memberOne.userId === userId
         ? conversation.memberOne
         : conversation.memberTwo;
 
@@ -86,7 +85,7 @@ const handler = async (
       include: {
         member: {
           include: {
-            profile: true,
+            user: true,
           },
         },
       },
@@ -118,7 +117,7 @@ const handler = async (
         include: {
           member: {
             include: {
-              profile: true,
+              user: true,
             },
           },
         },
@@ -140,7 +139,7 @@ const handler = async (
         include: {
           member: {
             include: {
-              profile: true,
+              user: true,
             },
           },
         },
@@ -153,7 +152,6 @@ const handler = async (
 
     return res.status(200).json(message);
   } catch (error) {
-    console.log('[DIRECT_MESSAGE_ID]', error);
     return res.status(500).json({ error: 'Internal Error' });
   }
 };

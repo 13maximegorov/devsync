@@ -1,4 +1,4 @@
-import { currentProfile } from '@/lib/current-profile';
+import { currentUser } from '@/lib/auth';
 import db from '@/lib/db';
 import { DirectMessage } from '@prisma/client';
 import { NextResponse } from 'next/server';
@@ -7,13 +7,13 @@ const MESSAGES_BATCH = 20;
 
 export async function GET(req: Request) {
   try {
-    const profile = await currentProfile();
+    const user = await currentUser();
     const { searchParams } = new URL(req.url);
 
     const cursor = searchParams.get('cursor');
     const conversationId = searchParams.get('conversationId');
 
-    if (!profile) {
+    if (!user) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
@@ -36,7 +36,7 @@ export async function GET(req: Request) {
         include: {
           member: {
             include: {
-              profile: true,
+              user: true,
             },
           },
         },
@@ -53,7 +53,7 @@ export async function GET(req: Request) {
         include: {
           member: {
             include: {
-              profile: true,
+              user: true,
             },
           },
         },
@@ -74,7 +74,6 @@ export async function GET(req: Request) {
       nextCursor,
     });
   } catch (error) {
-    console.log('[DIRECT_MESSAGES_GET]', error);
     return new NextResponse('Internal Error', { status: 500 });
   }
 }

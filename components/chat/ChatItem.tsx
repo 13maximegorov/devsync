@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { useModalStore } from '@/hooks/useModalStore';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Member, MemberRole, Profile } from '@prisma/client';
+import { Member, MemberRole, User } from '@prisma/client';
 import axios from 'axios';
 import { Crown, Edit, FileIcon, ShieldCheck, Trash } from 'lucide-react';
 import Image from 'next/image';
@@ -22,7 +22,7 @@ interface ChatItemProps {
   id: string;
   content: string;
   member: Member & {
-    profile: Profile;
+    user: User;
   };
   timestamp: string;
   fileUrl: string | null;
@@ -138,7 +138,7 @@ export const ChatItem = ({
           onClick={onMemberClick}
           className="cursor-pointer transition hover:drop-shadow-md"
         >
-          <UserAvatar src={member.profile.imageUrl} />
+          <UserAvatar src={member.user.image} />
         </div>
         <div className="flex w-full flex-col">
           <div className="flex items-center gap-x-2">
@@ -147,7 +147,7 @@ export const ChatItem = ({
                 onClick={onMemberClick}
                 className="cursor-pointer text-sm font-semibold hover:underline"
               >
-                {member.profile.name}
+                {member.user.name}
               </p>
               <ActionTooltip label={roleMap[member.role]}>
                 {roleIconMap[member.role]}

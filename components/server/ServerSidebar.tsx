@@ -4,7 +4,7 @@ import { ServerMember } from '@/components/server/ServerMember';
 import { ServerSearch } from '@/components/server/ServerSearch';
 import { ServerSection } from '@/components/server/ServerSection';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { currentProfile } from '@/lib/current-profile';
+import { currentUser } from '@/lib/auth';
 import db from '@/lib/db';
 import { ChannelType, MemberRole } from '@prisma/client';
 import { Crown, Hash, Mic, ShieldCheck, Video } from 'lucide-react';
@@ -29,9 +29,9 @@ const roleIconMap = {
 };
 
 export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
-  const profile = await currentProfile();
+  const user = await currentUser();
 
-  if (!profile) {
+  if (!user) {
     return redirect('/');
   }
 
@@ -47,7 +47,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
       },
       members: {
         include: {
-          profile: true,
+          user: true,
         },
         orderBy: {
           role: 'asc',
@@ -68,16 +68,13 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
     (channel) => channel.type === ChannelType.VIDEO,
   );
 
-  const members = server?.members.filter(
-    (member) => member.profileId !== profile.id,
-  );
+  const members = server?.members.filter((member) => member.userId !== user.id);
 
   if (!server) {
     return redirect('/');
   }
 
-  const role = server.members.find((member) => member.profileId === profile.id)
-    ?.role;
+  const role = server.members.find((member) => member.userId === user.id)?.role;
 
   return (
     <div className="flex h-full w-full flex-col border-r border-border bg-background text-primary">
@@ -120,7 +117,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
               type: 'member',
               data: members?.map((member) => ({
                 id: member.id,
-                name: member.profile.name,
+                name: member.user.name,
                 icon: roleIconMap[member.role],
               })),
             },

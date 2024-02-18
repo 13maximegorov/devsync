@@ -6,13 +6,13 @@ import { useChatQuery } from '@/hooks/useChatQuery';
 import { useChatScroll } from '@/hooks/useChatScroll';
 import { useChatSocket } from '@/hooks/useChatSocket';
 import format from '@/lib/format';
-import { MessageWithMemberWithProfile } from '@/types/types';
+import { MessageWithMemberWithUser } from '@/types/types';
 import { Member } from '@prisma/client';
 import { Loader2, ServerCrash } from 'lucide-react';
 import { Fragment, useRef } from 'react';
 
 interface ChatMessagesProps {
-  name: string;
+  name: string | null;
   member: Member;
   chatId: string;
   apiUrl: string;
@@ -24,7 +24,7 @@ interface ChatMessagesProps {
 }
 
 interface Data {
-  items: MessageWithMemberWithProfile[];
+  items: MessageWithMemberWithUser[];
   nextCursor: string | null;
 }
 

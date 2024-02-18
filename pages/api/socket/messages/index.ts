@@ -1,4 +1,3 @@
-import { currentProfilePages } from '@/lib/current-profile-pages';
 import db from '@/lib/db';
 import { NextApiResponseServerIO } from '@/types/types';
 import { NextApiRequest } from 'next';
@@ -9,6 +8,7 @@ interface NextApiRequestExtends extends NextApiRequest {
     fileUrl?: string;
   };
   query: {
+    userId: string;
     serverId: string;
     channelId: string;
   };
@@ -23,11 +23,10 @@ const handler = async (
   }
 
   try {
-    const profile = await currentProfilePages(req);
     const { content, fileUrl } = req.body;
-    const { serverId, channelId } = req.query;
+    const { userId, serverId, channelId } = req.query;
 
-    if (!profile) {
+    if (!userId) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
@@ -48,7 +47,7 @@ const handler = async (
         id: serverId,
         members: {
           some: {
-            profileId: profile.id,
+            userId,
           },
         },
       },
@@ -72,9 +71,7 @@ const handler = async (
       return res.status(404).json({ error: 'Channel not found' });
     }
 
-    const member = server.members.find(
-      (member) => member.profileId === profile.id,
-    );
+    const member = server.members.find((member) => member.userId === userId);
 
     if (!member) {
       return res.status(404).json({ error: 'Member not found' });
@@ -90,7 +87,7 @@ const handler = async (
       include: {
         member: {
           include: {
-            profile: true,
+            user: true,
           },
         },
       },
@@ -102,7 +99,6 @@ const handler = async (
 
     return res.status(200).json(message);
   } catch (error) {
-    console.log('[MESSAGES_POST]', error);
     return res.status(500).json({ error: 'Internal Error' });
   }
 };

@@ -27,11 +27,11 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 const formSchema = z.object({
-  imageUrl: z.string().min(1, {
-    message: 'Изображение сервера обязательно.',
+  image: z.string().min(1, {
+    message: 'Это поле обязательно.',
   }),
   name: z.string().min(1, {
-    message: 'Название сервера обязательно.',
+    message: 'Это поле обязательно.',
   }),
 });
 
@@ -46,7 +46,7 @@ export const CreateServerModal = () => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      imageUrl: '',
+      image: '',
       name: '',
     },
   });
@@ -90,7 +90,7 @@ export const CreateServerModal = () => {
           >
             <FormField
               control={form.control}
-              name="imageUrl"
+              name="image"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Изображение сервера</FormLabel>

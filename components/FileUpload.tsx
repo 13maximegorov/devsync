@@ -68,9 +68,6 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
       onClientUploadComplete={(res) => {
         onChange(res?.[0].url);
       }}
-      onUploadError={(error: Error) => {
-        console.log(error);
-      }}
       config={{
         mode: 'auto',
       }}

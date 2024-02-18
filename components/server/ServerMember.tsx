@@ -2,12 +2,12 @@
 
 import { UserAvatar } from '@/components/UserAvatar';
 import { cn } from '@/lib/utils';
-import { Member, MemberRole, Profile, Server } from '@prisma/client';
+import { Member, MemberRole, Server, User } from '@prisma/client';
 import { Crown, ShieldCheck } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 
 interface ServerMemberProps {
-  member: Member & { profile: Profile };
+  member: Member & { user: User };
   server: Server;
 }
 
@@ -21,7 +21,7 @@ const roleIconMap = {
   ),
 };
 
-export const ServerMember = ({ member, server }: ServerMemberProps) => {
+export const ServerMember = ({ member }: ServerMemberProps) => {
   const params = useParams<{ serverId: string; memberId: string }>();
   const router = useRouter();
 
@@ -40,11 +40,11 @@ export const ServerMember = ({ member, server }: ServerMemberProps) => {
       )}
     >
       <UserAvatar
-        src={member.profile.imageUrl}
+        src={member.user.image}
         className="h-8 w-8 md:h-8 md:w-8"
       />
       <p className="truncate text-sm font-semibold transition group-hover:text-accent-foreground">
-        {member.profile.name}
+        {member.user.name}
       </p>
       {icon}
     </button>
