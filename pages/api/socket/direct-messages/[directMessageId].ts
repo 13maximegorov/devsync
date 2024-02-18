@@ -26,7 +26,13 @@ const handler = async (
     const { content } = req.body;
     const { userId, conversationId, directMessageId } = req.query;
 
-    if (!userId) {
+    const user = await db.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
@@ -40,12 +46,12 @@ const handler = async (
         OR: [
           {
             memberOne: {
-              userId: userId,
+              userId: user.id,
             },
           },
           {
             memberTwo: {
-              userId: userId,
+              userId: user.id,
             },
           },
         ],
@@ -69,7 +75,7 @@ const handler = async (
     }
 
     const member =
-      conversation.memberOne.userId === userId
+      conversation.memberOne.userId === user.id
         ? conversation.memberOne
         : conversation.memberTwo;
 

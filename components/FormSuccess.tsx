@@ -9,7 +9,7 @@ export const FormSuccess = ({ message }: FormSuccessProps) => {
   if (!message) return null;
 
   return (
-    <Alert>
+    <Alert variant="success">
       <CheckCircle2 className="h-4 w-4" />
       <AlertTitle>Успешно</AlertTitle>
       <AlertDescription>{message}</AlertDescription>

@@ -70,7 +70,7 @@ export const {
 
       return session;
     },
-    async jwt({ token }) {
+    async jwt({ token, account }) {
       if (!token.sub) return token;
 
       const existingUser = await getUserById(token.sub);

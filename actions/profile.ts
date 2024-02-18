@@ -6,11 +6,10 @@ import { currentUser } from '@/lib/auth';
 import db from '@/lib/db';
 import { sendVerificationEmail } from '@/lib/mail';
 import { generateVerificationToken } from '@/lib/tokens';
-import { SettingsSchema } from '@/schemas';
-import { compare, hash } from 'bcryptjs';
+import { type ProfileSchema } from '@/schemas';
 import * as z from 'zod';
 
-export const settings = async (values: z.infer<typeof SettingsSchema>) => {
+export const profile = async (values: z.infer<typeof ProfileSchema>) => {
   const user = await currentUser();
 
   if (!user) {
@@ -21,13 +20,6 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
 
   if (!dbUser) {
     return { error: 'Неавторизованный.' };
-  }
-
-  if (user.isOAuth) {
-    values.email = undefined;
-    values.password = undefined;
-    values.newPassword = undefined;
-    values.isTwoFactorEnabled = undefined;
   }
 
   if (values.email && values.email !== user.email) {
@@ -47,19 +39,6 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     return { success: 'Письмо с подтверждением отправлено.' };
   }
 
-  if (values.password && values.newPassword && dbUser.password) {
-    const passwordMatch = await compare(values.password, dbUser.password);
-
-    if (!passwordMatch) {
-      return { error: 'Неверный пароль.' };
-    }
-
-    const hashedPassword = await hash(values.newPassword, 10);
-
-    values.password = hashedPassword;
-    values.newPassword = undefined;
-  }
-
   const updatedUser = await db.user.update({
     where: { id: dbUser.id },
     data: {
@@ -71,9 +50,8 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     user: {
       name: updatedUser.name,
       email: updatedUser.email,
-      isTwoFactorEnabled: updatedUser.isTwoFactorEnabled,
     },
   });
 
-  return { success: 'Настройки обновлены.' };
+  return { success: 'Профиль обновлен.' };
 };

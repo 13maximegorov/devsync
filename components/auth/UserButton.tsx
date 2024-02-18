@@ -12,16 +12,18 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { UserAvatar } from '@/components/UserAvatar';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { useModalStore } from '@/hooks/useModalStore';
 
 export function UserButton() {
   const user = useCurrentUser();
+  const { onOpen } = useModalStore();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="relative h-8 w-8 rounded-full"
+          className="relative h-[48px] w-[48px] rounded-full"
         >
           <UserAvatar
             src={user?.image}
@@ -45,7 +47,9 @@ export function UserButton() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Профиль</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => onOpen('profile')}>
+          Профиль
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => logout()}>Выйти</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -30,13 +30,30 @@ export const NewPasswordSchema = z.object({
   }),
 });
 
-export const SettingsSchema = z
+export const ProfileSchema = z.object({
+  name: z.string().min(1, {
+    message: 'Это поле обязательно.',
+  }),
+  email: z.string().email({
+    message: 'Это поле обязательно.',
+  }),
+});
+
+export const ProfileProviderSchema = z.object({
+  name: z.string().min(1, {
+    message: 'Это поле обязательно.',
+  }),
+});
+
+export const SecuritySchema = z
   .object({
-    name: z.optional(z.string()),
     isTwoFactorEnabled: z.optional(z.boolean()),
-    email: z.optional(z.string().email()),
-    password: z.optional(z.string().min(6)),
-    newPassword: z.optional(z.string().min(6)),
+    password: z.optional(
+      z.string().min(6, { message: 'Требуется минимум 6 символов.' }),
+    ),
+    newPassword: z.optional(
+      z.string().min(6, { message: 'Требуется минимум 6 символов.' }),
+    ),
   })
   .refine(
     (data) => {

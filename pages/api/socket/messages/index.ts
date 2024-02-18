@@ -26,7 +26,13 @@ const handler = async (
     const { content, fileUrl } = req.body;
     const { userId, serverId, channelId } = req.query;
 
-    if (!userId) {
+    const user = await db.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
@@ -47,7 +53,7 @@ const handler = async (
         id: serverId,
         members: {
           some: {
-            userId,
+            userId: user.id,
           },
         },
       },
@@ -71,7 +77,7 @@ const handler = async (
       return res.status(404).json({ error: 'Channel not found' });
     }
 
-    const member = server.members.find((member) => member.userId === userId);
+    const member = server.members.find((member) => member.userId === user.id);
 
     if (!member) {
       return res.status(404).json({ error: 'Member not found' });

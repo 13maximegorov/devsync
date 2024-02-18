@@ -65,7 +65,7 @@ export const LoginForm = () => {
             setShowTwoFactor(true);
           }
         })
-        .catch(() => setError('Что-то пошло не так!'));
+        .catch(() => setError('Что-то пошло не так.'));
     });
   };
 

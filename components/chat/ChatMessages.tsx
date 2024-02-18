@@ -79,7 +79,7 @@ export const ChatMessages = ({
     return (
       <div className="flex flex-1 flex-col items-center justify-center">
         <ServerCrash className="my-4 h-7 w-7 text-muted-foreground" />
-        <p className="text-xs text-muted-foreground">Что-то пошло не так!</p>
+        <p className="text-xs text-muted-foreground">Что-то пошло не так.</p>
       </div>
     );
   }
