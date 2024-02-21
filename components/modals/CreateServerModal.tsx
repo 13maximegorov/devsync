@@ -1,6 +1,6 @@
 'use client';
 
-import { FileUpload } from '@/components/FileUpload';
+import { ImageUpload } from '@/components/ImageUpload';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -95,8 +95,7 @@ export const CreateServerModal = () => {
                 <FormItem>
                   <FormLabel>Изображение сервера</FormLabel>
                   <FormControl>
-                    <FileUpload
-                      endpoint="serverImage"
+                    <ImageUpload
                       value={field.value}
                       onChange={field.onChange}
                     />

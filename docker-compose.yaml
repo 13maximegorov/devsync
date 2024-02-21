@@ -1,7 +1,6 @@
 services:
   postgres:
     image: postgres
-    restart: always
     ports:
       - 5432:5432
     env_file: .env.development
@@ -9,7 +8,6 @@ services:
       - postgres_data:/var/lib/postgresql/data
   livekit:
     image: livekit/livekit-server
-    restart: always
     ports:
       - 7880:7880
       - 7881:7881
@@ -17,6 +15,27 @@ services:
     volumes:
       - $PWD/livekit.yaml:/livekit.yaml
     command: --config /livekit.yaml --node-ip=127.0.0.1
+  minio:
+    image: minio/minio
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - minio_storage:/data
+    env_file: .env.development
+    command: server --console-address ":9001" /data
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set myminio http://minio:9000 minio minio123;
+      /usr/bin/mc mb myminio/devsync;
+      /usr/bin/mc anonymous set public myminio/devsync;
+      exit 0;
+      "
 
 volumes:
   postgres_data:
+  minio_storage:

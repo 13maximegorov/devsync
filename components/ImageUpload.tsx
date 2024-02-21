@@ -1,18 +1,32 @@
 'use client';
 
-import { OurFileRouter } from '@/app/api/uploadthing/core';
-import { UploadDropzone } from '@/lib/uploadthing';
-import { FileIcon, Loader2, X } from 'lucide-react';
+import { FileIcon, X } from 'lucide-react';
+import { useNextUpload } from 'next-upload/react';
 import Image from 'next/image';
+import { useDropzone } from 'react-dropzone';
 
-interface FileUploadProps {
+interface ImageUploadProps {
   onChange: (url?: string) => void;
   value: string;
-  endpoint: keyof OurFileRouter;
 }
 
-export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
+export const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
   const fileType = value?.split('.').pop();
+
+  const nup = useNextUpload();
+
+  const onDropAccepted = (acceptedFiles: File[]) => {
+    console.log(acceptedFiles);
+    nup.upload(
+      acceptedFiles.map((file) => ({
+        file,
+      })),
+    );
+  };
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDropAccepted,
+  });
 
   if (value && fileType !== 'pdf') {
     return (
@@ -62,24 +76,14 @@ export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
   }
 
   return (
-    <UploadDropzone
-      className="w-full border-border ut-button:hidden ut-allowed-content:text-muted-foreground ut-label:text-indigo-500 ut-upload-icon:text-indigo-500"
-      endpoint={endpoint}
-      onClientUploadComplete={(res) => {
-        onChange(res?.[0].url);
-      }}
-      config={{
-        mode: 'auto',
-      }}
-      content={{
-        label({ isUploading }) {
-          return isUploading ? (
-            <Loader2 className="mb-4 h-8 w-8 animate-spin text-indigo-500" />
-          ) : (
-            'Выберите файлы или перетащите'
-          );
-        },
-      }}
-    />
+    <div {...getRootProps()}>
+      <input {...getInputProps()} />
+      {isDragActive ? (
+        <p>Drop the files here ...</p>
+      ) : (
+        <p>Drag drop some files here, or click to select files</p>
+      )}
+      {nup.isUploading && <p>Uploading...</p>}
+    </div>
   );
 };

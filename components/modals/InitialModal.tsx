@@ -1,6 +1,5 @@
 'use client';
 
-import { FileUpload } from '@/components/FileUpload';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -93,13 +92,7 @@ export const InitialModal = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Изображение сервера</FormLabel>
-                  <FormControl>
-                    <FileUpload
-                      endpoint="serverImage"
-                      value={field.value}
-                      onChange={field.onChange}
-                    />
-                  </FormControl>
+                  <FormControl></FormControl>
                   <FormMessage />
                 </FormItem>
               )}
