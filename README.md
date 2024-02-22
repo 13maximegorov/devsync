@@ -12,21 +12,42 @@
 6. Zustand
 7. Prisma
 8. Zod
-9. PostgreSQL
-10. Socket.IO
-11. TanStack Query
-12. LiveKit (Golang)
-13. ESLint
-14. Prettier
-15. Docker
-16. Caddy
+9. Auth.js
+10. PostgreSQL
+11. Socket.IO
+12. TanStack Query
+13. LiveKit (Golang)
+14. ESLint
+15. Prettier
+16. Docker
+17. Caddy
+18. MinIO (S3 Object Storage)
 
 ## Как запустить DevSync
 
 ### Development
 
+#### Запуск всех сервисов в Docker (PostgreSQL, LiveKit, MinIO, Create Bucket)
+
+```shell
+docker-compose up -d
+```
+
+#### Установка всех пакетов NPM
+
 ```shell
 npm i
+```
+
+#### Настройка Prism
+
+```shell
+npm run prisma:generate:dev
+npm run db:push:dev
+```
+
+#### Запуск приложения
+
+```shell
 npm run dev
-docker-compose up -d
 ```

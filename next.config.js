@@ -5,7 +5,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'utfs.io',
+        hostname: 'devsync',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
       },
     ],
   },

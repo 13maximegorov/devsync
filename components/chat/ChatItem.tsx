@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useModalStore } from '@/hooks/useModalStore';
+import { isImage } from '@/lib/is-image';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Member, MemberRole, User } from '@prisma/client';
@@ -121,15 +122,13 @@ export const ChatItem = ({
     });
   }, [content, form]);
 
-  const fileType = fileUrl?.split('.').pop();
-
   const isAdmin = currentMember.role === MemberRole.ADMIN;
   const isModerator = currentMember.role === MemberRole.MODERATOR;
   const isOwner = currentMember.id === member.id;
   const canDeleteMessage = !deleted && (isAdmin || isModerator || isOwner);
   const canEditMessage = !deleted && isOwner && !fileUrl;
-  const isPDF = fileType === 'pdf' && fileUrl;
-  const isImage = !isPDF && fileUrl;
+  const isFile = fileUrl && !isImage(fileUrl);
+  const isImg = fileUrl && isImage(fileUrl);
 
   return (
     <div className="group relative flex w-full items-center p-4 transition hover:bg-accent/50">
@@ -155,7 +154,7 @@ export const ChatItem = ({
             </div>
             <span className="text-xs text-muted-foreground">{timestamp}</span>
           </div>
-          {isImage && (
+          {isImg && (
             <a
               href={fileUrl}
               target="_blank"
@@ -170,7 +169,7 @@ export const ChatItem = ({
               />
             </a>
           )}
-          {isPDF && (
+          {isFile && (
             <div className="relative mt-2 flex items-center rounded-md bg-muted p-2">
               <FileIcon className="h-10 w-10 fill-indigo-200 stroke-indigo-500" />
               <a
@@ -179,7 +178,7 @@ export const ChatItem = ({
                 rel="noopener noreferrer"
                 className="ml-2 text-sm text-indigo-500 hover:underline"
               >
-                PDF файл
+                ...{fileUrl.split('/')[fileUrl.split('/').length - 1]}
               </a>
             </div>
           )}
