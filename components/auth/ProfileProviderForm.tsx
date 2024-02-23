@@ -79,7 +79,7 @@ export const ProfileProviderForm = () => {
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder="Иван Иванов"
+                      placeholder="Имя Фамилия"
                       disabled={isPending}
                     />
                   </FormControl>

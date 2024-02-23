@@ -252,7 +252,7 @@ export const ChatItem = ({
                   query: socketQuery,
                 })
               }
-              className="ml-auto h-4 w-4 cursor-pointer text-muted-foreground transition hover:text-foreground"
+              className="ml-auto h-4 w-4 cursor-pointer text-red-500 transition hover:text-foreground"
             />
           </ActionTooltip>
         </div>
