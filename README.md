@@ -58,3 +58,4 @@ npm run dev
 - [ ] Внедрить редактор текста Tiptap
 - [ ] Доделать docker-compose для production
 - [ ] Добавить в README раздел "Production"
+- [ ] Исправить перенаправление на личный чат после звонка
