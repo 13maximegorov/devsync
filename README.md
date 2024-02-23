@@ -51,3 +51,10 @@ npm run db:push:dev
 ```shell
 npm run dev
 ```
+
+## TODO:
+
+- [ ] Обновить LiveKit
+- [ ] Внедрить редактор текста Tiptap
+- [ ] Доделать docker-compose для production
+- [ ] Добавить в README раздел "Production"
