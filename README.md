@@ -54,15 +54,15 @@ npm run dev
 
 ### Production
 
+#### Запуск сервисов в Docker (PostgreSQL, MinIO, Create Bucket, Next.js)
+
+```shell
+docker-compose -f docker-compose.prod.yaml up -d
+```
+
 #### Запуск сервисов в Docker (LiveKit, Redis, Caddy)
 
 ```shell
 cd livekit
 docker-compose up -d
-```
-
-#### Запуск сервисов в Docker (PostgreSQL, MinIO, Create Bucket, Next.js)
-
-```shell
-docker-compose -f docker-compose.prod.yaml up -d
 ```
