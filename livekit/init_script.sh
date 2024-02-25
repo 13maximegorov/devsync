@@ -90,6 +90,17 @@ apps:
               - handler: proxy
                 upstreams:
                   - dial: ["localhost:7880"]
+          - match:
+              - tls:
+                  sni:
+                    - "devsync.ru"
+            handle:
+              - handler: tls
+                connection_policies:
+                  - alpn: ["http/1.1"]
+              - handler: proxy
+                upstreams:
+                  - dial: ["localhost:3000"]
 
 
 EOF

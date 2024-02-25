@@ -1,3 +1,0 @@
-devsync.ru {
-    reverse_proxy nextjs:3000
-}

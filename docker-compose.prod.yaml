@@ -16,19 +16,27 @@ services:
       - NODE_ENV=production
     depends_on:
       - postgres
-  caddy:
-    image: caddy:latest
-    restart: unless-stopped
+  minio:
+    image: minio/minio
     ports:
-      - '80:80'
-      - '443:443'
-      - '443:443/udp'
+      - 9000:9000
+      - 9001:9001
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
+      - minio_storage:/data
+    env_file: .env.production
+    command: server --console-address ":9001" /data
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set myminio http://minio:9000 minio minio123;
+      /usr/bin/mc mb myminio/devsync;
+      /usr/bin/mc anonymous set public myminio/devsync;
+      exit 0;
+      "
 
 volumes:
   postgres_data:
-  caddy_data:
-  caddy_config:
+  minio_storage:

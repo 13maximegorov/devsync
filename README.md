@@ -52,9 +52,17 @@ npm run db:push:dev
 npm run dev
 ```
 
-## TODO:
+### Production
 
-- [ ] Внедрить редактор текста Tiptap
-- [ ] Доделать docker-compose для production
-- [ ] Добавить в README раздел "Production"
-- [ ] Исправить перенаправление на личный чат после звонка
+#### Запуск сервисов в Docker (LiveKit, Redis, Caddy)
+
+```shell
+cd livekit
+docker-compose up -d
+```
+
+#### Запуск сервисов в Docker (PostgreSQL, MinIO, Create Bucket, Next.js)
+
+```shell
+docker-compose -f docker-compose.prod.yaml up -d
+```
