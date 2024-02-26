@@ -6,6 +6,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import Yandex from 'next-auth/providers/yandex';
 
 export default {
+  trustHost: true,
   providers: [
     Yandex({
       clientId: process.env.YANDEX_CLIENT_ID,
