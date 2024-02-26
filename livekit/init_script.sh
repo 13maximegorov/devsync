@@ -66,6 +66,8 @@ apps:
         - devsync.ru
         - livekit.devsync.ru
         - livekit-turn.devsync.ru
+        - s3.devsync.ru
+        - s3-console.devsync.ru
   layer4:
     servers:
       main:
@@ -105,7 +107,7 @@ apps:
           - match:
               - tls:
                   sni:
-                    - 'devsync.ru:9000'
+                    - 's3.devsync.ru'
             handle:
               - handler: tls
                 connection_policies:
@@ -116,7 +118,7 @@ apps:
           - match:
               - tls:
                   sni:
-                    - 'devsync.ru:9001'
+                    - 's3-console.devsync.ru'
             handle:
               - handler: tls
                 connection_policies:
