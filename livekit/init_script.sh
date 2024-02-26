@@ -63,6 +63,7 @@ apps:
   tls:
     certificates:
       automate:
+        - devsync.ru
         - livekit.devsync.ru
         - livekit-turn.devsync.ru
   layer4:
