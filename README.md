@@ -1,6 +1,3 @@
-![DevSync](./banner_dark.png#gh-dark-mode-only)
-![DevSync](./banner_light.png#gh-light-mode-only)
-
 # DevSync
 
 **DevSync** — это приложение мгновенного обмена сообщениями, организации аудио- и видеоконференций для команд разработки программного обеспечения.
