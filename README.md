@@ -98,7 +98,7 @@ npm run dev
 - `s3.<domain>`
 - `s3-console.<domain>`
 
-Вместо `<domain>` укажите свой основной домен (например, example.com).
+Вместо `<domain>` укажите основной домен (например, example.com).
 
 #### Настройка файла .env.production
 
