@@ -90,9 +90,17 @@ npm run dev
 
 ### Production
 
-#### Настройка файла .env.production
+Вы должны иметь основной домен и поддомены:
 
-Вместо `<domain>` вставьте свой домен.
+- `<domain>`
+- `livekit.<domain>`
+- `livekit-turn.<domain>`
+- `s3.<domain>`
+- `s3-console.<domain>`
+
+Вместо `<domain>` укажите свой основной домен (например, example.com).
+
+#### Настройка файла .env.production
 
 ```js
 POSTGRES_PASSWORD=postgres
