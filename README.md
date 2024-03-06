@@ -27,6 +27,42 @@
 
 ### Development
 
+#### Настройка файла .env.development
+
+```js
+POSTGRES_PASSWORD=postgres
+POSTGRES_USER=postgres
+POSTGRES_DB=postgres
+
+DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/${POSTGRES_DB}?schema=public
+
+AUTH_SECRET=
+AUTH_URL=http://localhost:3000/api/auth
+
+YANDEX_CLIENT_ID=
+YANDEX_CLIENT_SECRET=
+
+SMTP_HOST=
+SMTP_PORT=
+SMTP_USER=
+SMTP_PASSWORD=
+SMTP_FROM_EMAIL=
+
+MINIO_ROOT_USER=
+MINIO_ROOT_PASSWORD=
+
+S3_ACCESS_KEY=
+S3_ACCESS_SECRET_KEY=
+S3_BUCKET=
+S3_ENDPOINT=http://localhost:9000
+
+LIVEKIT_API_KEY=
+LIVEKIT_API_SECRET=
+NEXT_PUBLIC_LIVEKIT_URL=ws://localhost:7880
+
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
 #### Запуск всех сервисов в Docker (PostgreSQL, LiveKit, MinIO, Create Bucket)
 
 ```shell
@@ -53,6 +89,44 @@ npm run dev
 ```
 
 ### Production
+
+#### Настройка файла .env.production
+
+Вместо `<domain>` вставьте свой домен.
+
+```js
+POSTGRES_PASSWORD=postgres
+POSTGRES_USER=postgres
+POSTGRES_DB=postgres
+
+DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
+
+AUTH_SECRET=
+AUTH_URL=https://<domain>/api/auth
+
+YANDEX_CLIENT_ID=
+YANDEX_CLIENT_SECRET=
+
+SMTP_HOST=
+SMTP_PORT=
+SMTP_USER=
+SMTP_PASSWORD=
+SMTP_FROM_EMAIL=
+
+MINIO_ROOT_USER=
+MINIO_ROOT_PASSWORD=
+
+S3_ACCESS_KEY=
+S3_ACCESS_SECRET_KEY=
+S3_BUCKET=
+S3_ENDPOINT=https://s3.<domain>
+
+LIVEKIT_API_KEY=
+LIVEKIT_API_SECRET=
+NEXT_PUBLIC_LIVEKIT_URL=wss://livekit.<domain>
+
+NEXT_PUBLIC_APP_URL=https://<domain>
+```
 
 #### Запуск сервисов в Docker (PostgreSQL, MinIO, Create Bucket, Next.js)
 
