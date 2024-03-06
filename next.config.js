@@ -5,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 's3.devsync',
+        hostname: 's3.devsync.ru',
       },
       {
         protocol: 'http',
