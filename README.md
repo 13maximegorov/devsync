@@ -1,5 +1,5 @@
-![DevSync](./logo_light.png#gh-dark-mode-only)
-![DevSync](./logo_dark.png#gh-light-mode-only)
+![DevSync](./banner_dark.png#gh-dark-mode-only)
+![DevSync](./banner_light.png#gh-light-mode-only)
 
 # DevSync
 
