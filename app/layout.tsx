@@ -18,7 +18,7 @@ const fontSans = Inter({
 export const metadata: Metadata = {
   title: 'DevSync',
   description:
-    'DevSync — это приложение мгновенного обмена сообщениями, организации аудио- и видеоконференций для команд разработки программного обеспечения.',
+    'DevSync — приложение для эффективного взаимодействия и коммуникации команды разработчиков ПО.',
 };
 
 interface RootLayoutProps {
