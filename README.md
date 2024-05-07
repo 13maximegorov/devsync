@@ -30,11 +30,11 @@
 #### Настройка файла .env.development
 
 ```js
-POSTGRES_PASSWORD=postgres
-POSTGRES_USER=postgres
-POSTGRES_DB=postgres
+POSTGRES_PASSWORD=
+POSTGRES_USER=
+POSTGRES_DB=
 
-DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/${POSTGRES_DB}?schema=public
+DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5555/${POSTGRES_DB}?schema=public
 
 AUTH_SECRET=
 AUTH_URL=http://localhost:3000/api/auth
@@ -103,11 +103,11 @@ npm run dev
 #### Настройка файла .env.production
 
 ```js
-POSTGRES_PASSWORD=postgres
-POSTGRES_USER=postgres
-POSTGRES_DB=postgres
+POSTGRES_PASSWORD=
+POSTGRES_USER=
+POSTGRES_DB=
 
-DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
+DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5555/${POSTGRES_DB}?schema=public
 
 AUTH_SECRET=
 AUTH_URL=https://<domain>/api/auth

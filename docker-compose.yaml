@@ -2,7 +2,7 @@ services:
   postgres:
     image: postgres
     ports:
-      - 5432:5432
+      - 5555:5432
     env_file: .env.development
     volumes:
       - postgres_data:/var/lib/postgresql/data
