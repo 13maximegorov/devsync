@@ -7,6 +7,8 @@ services:
     env_file: .env.production
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - postgres
   nextjs:
     build: .
     restart: always
@@ -15,6 +17,8 @@ services:
     environment:
       - NODE_ENV=production
     depends_on:
+      - postgres
+    networks:
       - postgres
   minio:
     image: minio/minio
@@ -40,3 +44,7 @@ services:
 volumes:
   postgres_data:
   minio_storage:
+
+networks:
+  postgres:
+    driver: bridge
