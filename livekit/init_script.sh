@@ -45,7 +45,7 @@ turn:
     udp_port: 3478
     external_tls: true
 keys:
-    APIkZCtoqxmZ8nj: TtE974f1YU8XT1XmlA4EYM7SDwec6QehsVwhfI9cMKLD
+    API7owQsvL5KRk4: KpQ5iIFdcVZlP3ae99pWqdhgDN7z7fdhsZLsbLCrrmF
 
 
 EOF
