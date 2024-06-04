@@ -1,11 +1,11 @@
 port: 7880
 rtc:
-    udp_port: 7882
-    tcp_port: 7881
-    use_external_ip: false
-    enable_loopback_candidate: false
+  udp_port: 7882
+  tcp_port: 7881
+  use_external_ip: false
+  enable_loopback_candidate: false
 keys:
-    APILL9Zcm5TR3Ui: 7NnuPmDF9Au9f66P8xQDGMptTfHbpUzJqC0fDJCqRbxA
+  APIRmV5JPxDKCoC: KoftdQCncHktCUspx78BSeMhxwXotnzANWefz6EteMhG
 logging:
-    json: false
-    level: info
+  json: false
+  level: info
